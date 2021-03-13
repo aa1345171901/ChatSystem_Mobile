@@ -60,6 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Facade.cs" />
     <Compile Include="Assets\UIFramework\Base\BasePanel.cs" />
     <Compile Include="Assets\UIFramework\Extension\DictionaryExtension.cs" />
     <Compile Include="Assets\UIFramework\UIManager.cs" />
@@ -284,6 +285,9 @@
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>D:/unity 2018/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
+    <Reference Include="Common">
+      <HintPath>F:/unity Project/Other/Chat_System/Assets/Pulgins/Common.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Analytics.Editor">
       <HintPath>F:/unity Project/Other/Chat_System/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
@@ -292,9 +296,6 @@
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
       <HintPath>F:/unity Project/Other/Chat_System/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
-    </Reference>
-    <Reference Include="Common">
-      <HintPath>F:/unity Project/Other/Chat_System/Assets/Pulgins/Common.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>D:/unity 2018/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
