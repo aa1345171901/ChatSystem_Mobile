@@ -3,26 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager {
-    /// <summary>
-    /// 单例模式
-    /// 1.定义一个静态变量外部访问，内部构造
-    /// 2.构造方法私有化，只能内部构造
-    /// </summary>
-    private static UIManager _instance;
-    public static UIManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new UIManager();
-            }
-
-            return _instance;
-        }
-    }
-
+public class UIManager : BaseManager
+{
     // 获取画布的位置
     private Transform canvasTransform;
     private Transform CanvasTransform
@@ -43,7 +25,8 @@ public class UIManager {
     private Stack<BasePanel> panelStack;                  //用于存储显示的panel
 
     // 初始化时从UIPanelType的json文件中读取对应的path
-    private UIManager() {
+    public UIManager(Facade facade):base(facade)
+    {
         ParseUIPanelTypeJson();
     }
 

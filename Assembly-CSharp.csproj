@@ -62,6 +62,12 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Facade.cs" />
     <Compile Include="Assets\Scripts\ItemOther\loginGif.cs" />
+    <Compile Include="Assets\Scripts\Manager\BaseManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\Net\ClientManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\Net\Message.cs" />
+    <Compile Include="Assets\Scripts\Manager\RequestManager.cs" />
+    <Compile Include="Assets\Scripts\Request\BaseRequest.cs" />
+    <Compile Include="Assets\Scripts\Request\LoginRequest.cs" />
     <Compile Include="Assets\UIFramework\Base\BasePanel.cs" />
     <Compile Include="Assets\UIFramework\Extension\DictionaryExtension.cs" />
     <Compile Include="Assets\UIFramework\UIManager.cs" />
