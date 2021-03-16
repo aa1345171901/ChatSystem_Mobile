@@ -36,11 +36,12 @@ public class Facade : MonoBehaviour
             new GameObject().AddComponent<Facade>();
             _instance = this;
         }
+        OnInit();
     }
 
     private void Start()
     {
-        OnInit();
+
     }
 
     /// <summary>

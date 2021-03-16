@@ -1,18 +1,27 @@
-﻿using System.Collections;
+﻿using Common;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LoginRequest : MonoBehaviour
+public class LoginRequest : BaseRequest
 {
-    // Start is called before the first frame update
-    void Start()
+    private LoginPanel loginPanel;
+
+    public override void Awake()
     {
-        
+        requestCode = RequestCode.User;
+        actionCode = ActionCode.Login;
+        loginPanel = this.GetComponent<LoginPanel>();
+        base.Awake();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void OnResponse(string data)
     {
-        
+        base.OnResponse(data);
+    }
+
+    public override void SendRequest(string data)
+    {
+        base.SendRequest(data);
     }
 }

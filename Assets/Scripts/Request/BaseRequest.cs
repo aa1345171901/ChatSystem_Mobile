@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseRequest
+public class BaseRequest : MonoBehaviour
 {
     protected ActionCode actionCode = ActionCode.None;
     protected RequestCode requestCode = RequestCode.None;
@@ -23,28 +23,36 @@ public abstract class BaseRequest
     }
 
     /// <summary>
-    /// 初始化，将该request存入requestManager字典
+    /// Awake生命周期，将该request存入requestManager字典
     /// </summary>
-    public virtual void Init()
+    public virtual void Awake()
     {
-        _facade.AddRequest(actionCode, this);
+        Facade.AddRequest(actionCode, this);
     }
 
     /// <summary>
-    /// 该form关闭时，将该Request也从字典移除
+    /// 物体销毁，将该Request也从字典移除
     /// </summary>
-    public virtual void Close()
+    public virtual void OnDestroy()
     {
-        _facade.RemoveRequest(actionCode);
+        if (Facade != null)
+        {
+            Facade.RemoveRequest(actionCode);
+        }
     }
 
     /// <summary>
     /// 对收到的信息进行处理
     /// </summary>
-    public abstract void OnResponse(string data);
+    public virtual void OnResponse(string data)
+    {
+    }
 
     /// <summary>
-    /// 项服务器发送请求，通过managerController发送
+    /// 项服务器发送请求，通过_facade发送
     /// </summary>
-    public abstract void SendRequest(string data);
+    public virtual void SendRequest(string data)
+    {
+        Facade.SendRequest(requestCode, actionCode, data);
+    }
 }
