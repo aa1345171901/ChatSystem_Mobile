@@ -17,11 +17,12 @@ public class LoginRequest : BaseRequest
 
     public override void OnResponse(string data)
     {
-        base.OnResponse(data);
+        loginPanel.OnLoginResponse(data);
     }
 
-    public override void SendRequest(string data)
+    public void SendRequest(string id, string password)
     {
-        base.SendRequest(data);
+        string data = id + "," + password;
+        SendRequest(data);
     }
 }

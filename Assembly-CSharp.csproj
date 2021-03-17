@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\Manager\Net\Message.cs" />
     <Compile Include="Assets\Scripts\Manager\RequestManager.cs" />
     <Compile Include="Assets\Scripts\Panel\LoginPanel.cs" />
+    <Compile Include="Assets\Scripts\Panel\MessagePanel.cs" />
     <Compile Include="Assets\Scripts\Request\BaseRequest.cs" />
     <Compile Include="Assets\Scripts\Request\LoginRequest.cs" />
     <Compile Include="Assets\UIFramework\Base\BasePanel.cs" />

@@ -24,10 +24,19 @@ public class UIManager : BaseManager
     private Dictionary<UIPanelType, BasePanel> panelDict;    //用于存储panel类型与实例的物体的对应
     private Stack<BasePanel> panelStack;                  //用于存储显示的panel
 
+    private MessagePanel msgPanel;     // 用于显示提示信息
+
     // 初始化时从UIPanelType的json文件中读取对应的path
     public UIManager(Facade facade):base(facade)
     {
         ParseUIPanelTypeJson();
+    }
+
+    public override void OnInit()
+    {
+        base.OnInit();
+        PushPanel(UIPanelType.MessagePanel);
+        PushPanel(UIPanelType.LoginPanel);
     }
 
     /// <summary>
@@ -115,16 +124,40 @@ public class UIManager : BaseManager
         panelPathDict.TryGetValue(panelType, out panelPath);
         GameObject go = GameObject.Instantiate(Resources.Load<GameObject>(panelPath));
         go.transform.SetParent(CanvasTransform,false);
+        go.GetComponent<BasePanel>().UIMng = this;
+        go.GetComponent<BasePanel>().Facade = this.facade;
         panelDict.Add(panelType,go.GetComponent<BasePanel>());
         return go.GetComponent<BasePanel>();
     }
 
-    public string test()
+    public void InjectMsgPanel(MessagePanel msgPanel)
     {
-        string path;
-        panelPathDict.TryGetValue(UIPanelType.ItemMessagePanel, out path);
-        Debug.Log(path);
-        return path;
+        this.msgPanel = msgPanel;
     }
-	
+
+    /// <summary>
+    /// 同步消息显示
+    /// </summary>
+    /// <param name="msg"></param>
+    public void ShowMessage(string msg)
+    {
+        if (msgPanel == null)
+        {
+            Debug.Log("无法显示提示信息，MsgPanel为空"); return;
+        }
+        msgPanel.ShowMessage(msg);
+    }
+
+    /// <summary>
+    /// 异步
+    /// </summary>
+    /// <param name="msg"></param>
+    public void ShowMessageSync(string msg)
+    {
+        if (msgPanel == null)
+        {
+            Debug.Log("无法显示提示信息，MsgPanel为空"); return;
+        }
+        msgPanel.ShowMessageSync(msg);
+    }
 }

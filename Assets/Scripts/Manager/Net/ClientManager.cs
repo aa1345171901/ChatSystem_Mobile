@@ -27,15 +27,14 @@ public class ClientManager : BaseManager
     {
         base.OnInit();
         message = new Message();
+        clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
         try
         {
-            clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
             clientSocket.Connect(IP, PORT);
             StartReceive();
         }
         catch (System.Exception e)
         {
-            Close();
             Debug.Log("无法连接服务器，请减查您的网络:" + e.Message);
         }
     }

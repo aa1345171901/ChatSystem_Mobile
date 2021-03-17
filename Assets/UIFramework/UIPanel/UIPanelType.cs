@@ -4,11 +4,6 @@ using UnityEngine;
 
 public enum UIPanelType
 {
-        ItemMessagePanel,
-        KnapsackPanel,
-        MainMenuPanel,
-        ShopPanel,
-        SkillPanel,
-        SystemPanel,
-        TaskPanel
+        LoginPanel,
+        MessagePanel,
 }

@@ -4,6 +4,30 @@ using UnityEngine;
 
 public class BasePanel : MonoBehaviour {
 
+    protected UIManager uiMng;
+    protected Facade _facade;
+
+    public Facade Facade
+    {
+        get
+        {
+            if (_facade == null)
+            {
+                _facade = Facade.Instance;
+            }
+            return _facade;
+        }
+        set
+        {
+            _facade = value;
+        }
+    }
+
+    public UIManager UIMng
+    {
+        set { uiMng = value; }
+    }
+
     /// <summary>
     /// 界面打开时的动作
     /// </summary>

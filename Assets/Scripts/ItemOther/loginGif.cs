@@ -40,7 +40,7 @@ public class loginGif : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
+
     }
 
     public void OnEnable()
