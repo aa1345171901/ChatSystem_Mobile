@@ -18,6 +18,20 @@ public class RegisterRequest : BaseRequest
 
     public override void OnResponse(string data)
     {
-        base.OnResponse(data);
+        string[] strs = data.Split(',');
+        ReturnCode returnCode = (ReturnCode)int.Parse(strs[0]);
+        if (returnCode == ReturnCode.Success)
+        {
+            int id = int.Parse(strs[1]);
+            int dataId = int.Parse(strs[2]);
+            Facade.GetUserData().LoginId = id;
+            Facade.GetUserData().DataId = dataId;
+
+            registerPanel.OnResponseRegister(returnCode, id);
+        }
+        else
+        {
+            registerPanel.OnResponseRegister(returnCode, 0);
+        }
     }
 }

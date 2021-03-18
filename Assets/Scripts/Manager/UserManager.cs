@@ -5,9 +5,22 @@ using UnityEngine;
 public class UserManager : BaseManager
 {
     // 用于保存用户数据
-    public UserData userdata { set; get; }
+    private UserData userdata;
+
+    public UserData UserData
+    {
+        get
+        {
+            return userdata;
+        }
+        set
+        {
+            userdata = value;
+        }
+    }
 
     public UserManager(Facade facade) : base(facade)
     {
+        userdata = new UserData();
     }
 }

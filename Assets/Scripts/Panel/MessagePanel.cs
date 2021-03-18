@@ -44,6 +44,12 @@ public class MessagePanel : BasePanel
     /// </summary>
     public void ShowMessage(string msg)
     {
+        gameObject.SetActive(true);
+
+        // 设置messagepanel为最后渲染
+        int count = transform.parent.childCount - 1;//Panel移位
+        transform.SetSiblingIndex(count);//Panel移位
+
         text.CrossFadeAlpha(1, 0.5f, false);
         text.text = msg;
         text.enabled = true;
@@ -56,5 +62,6 @@ public class MessagePanel : BasePanel
     private void Hide()
     {
         text.CrossFadeAlpha(0, 1, false);
+        gameObject.SetActive(false);
     }
 }

@@ -29,7 +29,7 @@ public class RegisterPanel : BasePanel
         registerButton.onClick.AddListener(OnRegisterClick);
 
         backButton = transform.Find("back").GetComponent<Button>();
-        backButton.onClick.AddListener(OnRegisterClick);
+        backButton.onClick.AddListener(OnBackClick);
     }
 
     /// <summary>
@@ -48,6 +48,14 @@ public class RegisterPanel : BasePanel
     {
         base.OnEnter();
         gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// 返回按钮点击
+    /// </summary>
+    private void OnBackClick()
+    {
+        uiMng.PopPanel();
     }
 
     /// <summary>
@@ -95,7 +103,7 @@ public class RegisterPanel : BasePanel
         if (returnCode == ReturnCode.Success)
         {
             uiMng.ShowMessageSync(string.Format("注册成功！\n您的账号是{0}", id));
-            uiMng.PopPanel();
+            uiMng.PopPanelSync();
         }
         else
         {

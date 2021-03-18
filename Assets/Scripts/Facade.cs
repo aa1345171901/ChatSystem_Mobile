@@ -120,6 +120,15 @@ public class Facade : MonoBehaviour
     /// <param name="userData"></param>
     public void SetUserData(UserData userData)
     {
-        userManager.userdata = userData;
+        userManager.UserData = userData;
+    }
+
+    /// <summary>
+    /// 获取用户的实例，方便设置
+    /// </summary>
+    /// <returns></returns>
+    public UserData GetUserData()
+    {
+        return userManager.UserData;
     }
 }

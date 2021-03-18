@@ -27,6 +27,7 @@ public class UIManager : BaseManager
     private MessagePanel msgPanel;     // 用于显示提示信息
 
     private UIPanelType uIPanelType = UIPanelType.None;   // 用于异步展示panel的标识
+    private bool isPop = false;                     // 用于异步出栈的标识
 
     // 初始化时从UIPanelType的json文件中读取对应的path
     public UIManager(Facade facade):base(facade)
@@ -43,6 +44,12 @@ public class UIManager : BaseManager
         {
             PushPanel(uIPanelType);
             uIPanelType = UIPanelType.None;
+        }
+
+        if (isPop)
+        {
+            PopPanel();
+            isPop = false;
         }
     }
 
@@ -108,6 +115,14 @@ public class UIManager : BaseManager
                 panel2.OnResume();
             }
         }
+    }
+
+    /// <summary>
+    /// 异步出栈
+    /// </summary>
+    public void PopPanelSync()
+    {
+        isPop = true;
     }
 
 
