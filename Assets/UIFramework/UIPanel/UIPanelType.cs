@@ -4,6 +4,9 @@ using UnityEngine;
 
 public enum UIPanelType
 {
+        None,
         LoginPanel,
         MessagePanel,
+        MainPanel,
+        RegisterPanel,
 }

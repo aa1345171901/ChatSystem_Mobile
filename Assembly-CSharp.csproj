@@ -66,10 +66,15 @@
     <Compile Include="Assets\Scripts\Manager\Net\ClientManager.cs" />
     <Compile Include="Assets\Scripts\Manager\Net\Message.cs" />
     <Compile Include="Assets\Scripts\Manager\RequestManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\UserManager.cs" />
+    <Compile Include="Assets\Scripts\Model\UserData.cs" />
     <Compile Include="Assets\Scripts\Panel\LoginPanel.cs" />
+    <Compile Include="Assets\Scripts\Panel\MainPanel.cs" />
     <Compile Include="Assets\Scripts\Panel\MessagePanel.cs" />
+    <Compile Include="Assets\Scripts\Panel\RegisterPanel.cs" />
     <Compile Include="Assets\Scripts\Request\BaseRequest.cs" />
     <Compile Include="Assets\Scripts\Request\LoginRequest.cs" />
+    <Compile Include="Assets\Scripts\Request\RegisterRequest.cs" />
     <Compile Include="Assets\UIFramework\Base\BasePanel.cs" />
     <Compile Include="Assets\UIFramework\Extension\DictionaryExtension.cs" />
     <Compile Include="Assets\UIFramework\UIManager.cs" />

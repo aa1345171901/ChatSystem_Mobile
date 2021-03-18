@@ -103,4 +103,10 @@ public class ClientManager : BaseManager
             clientSocket.Dispose();
         }
     }
+
+    public override void OnDestroy()
+    {
+        Close();
+        base.OnDestroy();
+    }
 }

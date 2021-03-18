@@ -6,6 +6,16 @@
     },
 
     {
+      "panelTypeString": "RegisterPanel",
+      "path": "Panel/RegisterPanel"
+    },
+
+    {
+      "panelTypeString": "MainPanel",
+      "path": "Panel/MainPanel"
+    },
+
+    {
       "panelTypeString": "MessagePanel",
       "path": "Panel/MessagePanel"
     }

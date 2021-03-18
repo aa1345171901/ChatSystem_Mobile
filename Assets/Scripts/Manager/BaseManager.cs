@@ -16,7 +16,18 @@ public class BaseManager
 
     }
 
+    /// <summary>
+    /// facade销毁时调用
+    /// </summary>
     public virtual void OnDestroy()
+    {
+
+    }
+
+    /// <summary>
+    /// 每帧调用，在facade调用，用于异步响应主线程
+    /// </summary>
+    public virtual void Update()
     {
 
     }

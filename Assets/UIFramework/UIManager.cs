@@ -26,17 +26,34 @@ public class UIManager : BaseManager
 
     private MessagePanel msgPanel;     // 用于显示提示信息
 
+    private UIPanelType uIPanelType = UIPanelType.None;   // 用于异步展示panel的标识
+
     // 初始化时从UIPanelType的json文件中读取对应的path
     public UIManager(Facade facade):base(facade)
     {
         ParseUIPanelTypeJson();
     }
 
+    /// <summary>
+    /// 每帧调用，使用facade的unity生命周期函数
+    /// </summary>
+    public override void Update()
+    {
+        if (uIPanelType != UIPanelType.None)
+        {
+            PushPanel(uIPanelType);
+            uIPanelType = UIPanelType.None;
+        }
+    }
+
+    /// <summary>
+    /// 初始化，进栈默认两个panel
+    /// </summary>
     public override void OnInit()
     {
         base.OnInit();
-        PushPanel(UIPanelType.MessagePanel);
         PushPanel(UIPanelType.LoginPanel);
+        PushPanel(UIPanelType.MessagePanel);
     }
 
     /// <summary>
@@ -63,6 +80,17 @@ public class UIManager : BaseManager
         panelStack.Push(newPanel);
     }
 
+    /// <summary>
+    /// 异步展示Panel
+    /// </summary>
+    public void PushPanelSync(UIPanelType uIPanelType)
+    {
+        this.uIPanelType = uIPanelType;
+    }
+
+    /// <summary>
+    /// panel出栈，栈顶的进入OnExit周期，栈第二个的进入OnResume周期，
+    /// </summary>
     public void PopPanel()
     {
         if (panelStack == null)
@@ -89,6 +117,9 @@ public class UIManager : BaseManager
         public List<UIPanelInfo> infoList;
     }
 
+    /// <summary>
+    /// 将json文件存入
+    /// </summary>
     private void ParseUIPanelTypeJson () {
         panelPathDict = new Dictionary<UIPanelType, string>();
 
@@ -130,6 +161,10 @@ public class UIManager : BaseManager
         return go.GetComponent<BasePanel>();
     }
 
+    /// <summary>
+    /// messagePanel获取
+    /// </summary>
+    /// <param name="msgPanel"></param>
     public void InjectMsgPanel(MessagePanel msgPanel)
     {
         this.msgPanel = msgPanel;

@@ -35,10 +35,7 @@ public class BaseRequest : MonoBehaviour
     /// </summary>
     public virtual void OnDestroy()
     {
-        if (Facade != null)
-        {
-            Facade.RemoveRequest(actionCode);
-        }
+        Facade.RemoveRequest(actionCode);
     }
 
     /// <summary>

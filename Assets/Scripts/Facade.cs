@@ -13,6 +13,7 @@ public class Facade : MonoBehaviour
     private ClientManager clientManager;
     private UIManager uiManager;
     private RequestManager requestManager;
+    private UserManager userManager;
 
     /// <summary>
     /// 单例模式，全局只有一个Facade控制
@@ -44,6 +45,17 @@ public class Facade : MonoBehaviour
     }
 
     /// <summary>
+    /// 实现Manager的update，需要异步生成物体什么的
+    /// </summary>
+    public void Update()
+    {
+        clientManager.Update();
+        uiManager.Update();
+        requestManager.Update();
+        userManager.Update();
+    }
+
+    /// <summary>
     /// Manager初始化，在Start周期进行，在Awake之后，保证_instance存在
     /// </summary>
     public void OnInit()
@@ -51,10 +63,23 @@ public class Facade : MonoBehaviour
         clientManager = new ClientManager(this);
         uiManager = new UIManager(this);
         requestManager = new RequestManager(this);
+        userManager = new UserManager(this);
 
         clientManager.OnInit();
         uiManager.OnInit();
         requestManager.OnInit();
+        userManager.OnInit();
+    }
+
+    /// <summary>
+    /// 物体销毁时调用
+    /// </summary>
+    public void OnDestroy()
+    {
+        clientManager.OnDestroy();
+        uiManager.OnDestroy();
+        requestManager.OnDestroy();
+        userManager.OnDestroy();
     }
 
     /// <summary>
@@ -87,5 +112,14 @@ public class Facade : MonoBehaviour
     public void RemoveRequest(ActionCode actionCode)
     {
         requestManager.RemoveRequest(actionCode);
+    }
+
+    /// <summary>
+    /// 用于设置用户的信息，在登录时
+    /// </summary>
+    /// <param name="userData"></param>
+    public void SetUserData(UserData userData)
+    {
+        userManager.userdata = userData;
     }
 }
