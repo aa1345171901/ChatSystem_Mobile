@@ -38,6 +38,18 @@ public class LoginPanel : BasePanel
     }
 
     /// <summary>
+    /// 重新进入panel时检查是否有userData
+    /// </summary>
+    public override void OnResume()
+    {
+        if (Facade.GetUserData().LoginId != 0)
+        {
+            userIdIF.text = Facade.GetUserData().LoginId.ToString();
+            Debug.Log(Facade.GetUserData().LoginId.ToString());
+        }
+    }
+
+    /// <summary>
     /// 登录按钮点击
     /// </summary>
     private void OnLoginClick()
@@ -66,9 +78,9 @@ public class LoginPanel : BasePanel
                 string data = id + "," + passWord;
                 loginRequest.SendRequest(data);
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
-                uiMng.ShowMessage("连接服务器失败");
+                uiMng.ShowMessage("连接服务器失败:" + e.Message);
             }
         }
     }

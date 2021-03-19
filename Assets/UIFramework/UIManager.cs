@@ -59,8 +59,8 @@ public class UIManager : BaseManager
     public override void OnInit()
     {
         base.OnInit();
-        PushPanel(UIPanelType.LoginPanel);
         PushPanel(UIPanelType.MessagePanel);
+        PushPanel(UIPanelType.LoginPanel);
     }
 
     /// <summary>

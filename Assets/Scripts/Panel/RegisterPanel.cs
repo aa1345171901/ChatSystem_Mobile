@@ -80,18 +80,24 @@ public class RegisterPanel : BasePanel
         {
             msg = "密码和重复密码不一致";
         }
-
-        // 验证成功就向服务器发送注册请求
-        if (msg == "")
+        try
         {
-            string nickName = nickNameIF.text.Trim();
-            string password = passwordIF.text.Trim();
-            string data = nickName + "," + password;
-            registerRequest.SendRequest(data);
+            // 验证成功就向服务器发送注册请求
+            if (msg == "")
+            {
+                string nickName = nickNameIF.text.Trim();
+                string password = passwordIF.text.Trim();
+                string data = nickName + "," + password;
+                registerRequest.SendRequest(data);
+            }
+            else
+            {
+                uiMng.ShowMessage(msg);
+            }
         }
-        else
+        catch (System.Exception e)
         {
-            uiMng.ShowMessage(msg);
+            uiMng.ShowMessage("连接服务器失败:" + e.Message);
         }
     }
 

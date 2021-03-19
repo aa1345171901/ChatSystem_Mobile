@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Facade.cs" />
+    <Compile Include="Assets\Scripts\ItemOther\InputFieldImg.cs" />
     <Compile Include="Assets\Scripts\ItemOther\loginGif.cs" />
     <Compile Include="Assets\Scripts\Manager\BaseManager.cs" />
     <Compile Include="Assets\Scripts\Manager\Net\ClientManager.cs" />
