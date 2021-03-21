@@ -73,7 +73,7 @@ MonoBehaviour:
   m_MinSize: {x: 234, y: 498}
   m_MaxSize: {x: 10004, y: 14048}
   vertical: 1
-  controlID: 52
+  controlID: 92
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 498}
   m_MaxSize: {x: 18008, y: 14048}
   vertical: 0
-  controlID: 51
+  controlID: 91
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -214,8 +214,8 @@ MonoBehaviour:
     y: 0
     width: 234
     height: 361
-  m_MinSize: {x: 204, y: 224}
-  m_MaxSize: {x: 4004, y: 4024}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -503,7 +503,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: d6fbffffb42d0000
+      m_ExpandedIDs: c6d7ffffd8d7ffffead7fffff2d7ffff54d8ffffd6fbffff0a2e0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -565,7 +565,7 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Panel
+    - Assets/Scripts/Panel
   m_ViewMode: 0
   m_StartGridSize: 58
   m_LastFolders: []
@@ -577,7 +577,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 24550000
     m_LastClickedID: 21796
-    m_ExpandedIDs: 00000000ea2700008c280000c6280000a0290000c82900000a2a0000cc2a0000fe2a0000102b00005a2b0000642b00009c2b0000b02b0000f62b00001c2c0000462c0000702c00000c2d0000602d0000f02d0000f22d0000
+    m_ExpandedIDs: 00000000ea2700008c280000c6280000a0290000c82900000a2a0000cc2a0000fe2a0000142b00005e2b0000682b0000a02b0000b42b00004c2c0000722c00009c2c0000c62c0000622d0000b62d0000462e0000482e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -602,10 +602,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 300}
+    scrollPos: {x: 0, y: 420}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000ea2700008c280000c6280000a0290000c82900000a2a0000cc2a0000fe2a0000102b00005a2b0000642b00009c2b0000b02b0000f62b00001c2c0000462c0000702c00000c2d0000602d0000f02d0000f22d0000
+    m_ExpandedIDs: ffffffff00000000ea2700008c280000c6280000a0290000c82900000a2a0000fe2a0000142b0000682b0000a02b0000b42b00004c2c0000722c00009c2c0000c62c0000622d0000b62d0000462e0000482e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
