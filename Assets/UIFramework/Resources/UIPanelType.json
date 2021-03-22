@@ -16,6 +16,16 @@
     },
 
     {
+      "panelTypeString": "FriendPanel",
+      "path": "Panel/FriendPanel"
+    },
+
+    {
+      "panelTypeString": "FriendQPanel",
+      "path": "Panel/FriendQPanel"
+    },
+
+    {
       "panelTypeString": "MessagePanel",
       "path": "Panel/MessagePanel"
     }

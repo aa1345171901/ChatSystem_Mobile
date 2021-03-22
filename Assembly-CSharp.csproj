@@ -70,6 +70,8 @@
     <Compile Include="Assets\Scripts\Manager\RequestManager.cs" />
     <Compile Include="Assets\Scripts\Manager\UserManager.cs" />
     <Compile Include="Assets\Scripts\Model\UserData.cs" />
+    <Compile Include="Assets\Scripts\Panel\FriendPanel.cs" />
+    <Compile Include="Assets\Scripts\Panel\FriendQPanel.cs" />
     <Compile Include="Assets\Scripts\Panel\LoginPanel.cs" />
     <Compile Include="Assets\Scripts\Panel\MainPanel.cs" />
     <Compile Include="Assets\Scripts\Panel\MessagePanel.cs" />
@@ -305,6 +307,24 @@
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>D:/unity 2018/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
+    <Reference Include="DemiLib">
+      <HintPath>F:/unity Project/Other/Chat_System/Assets/Demigiant/DemiLib/Core/DemiLib.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween">
+      <HintPath>F:/unity Project/Other/Chat_System/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween43">
+      <HintPath>F:/unity Project/Other/Chat_System/Assets/Demigiant/DOTween/DOTween43.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween46">
+      <HintPath>F:/unity Project/Other/Chat_System/Assets/Demigiant/DOTween/DOTween46.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween50">
+      <HintPath>F:/unity Project/Other/Chat_System/Assets/Demigiant/DOTween/DOTween50.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTweenPro">
+      <HintPath>F:/unity Project/Other/Chat_System/Assets/Demigiant/DOTweenPro/DOTweenPro.dll</HintPath>
+    </Reference>
     <Reference Include="Common">
       <HintPath>F:/unity Project/Other/Chat_System/Assets/Pulgins/Common.dll</HintPath>
     </Reference>
@@ -316,24 +336,6 @@
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
       <HintPath>F:/unity Project/Other/Chat_System/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween46">
-      <HintPath>F:/unity Project/Other/Chat_System/Assets/Demigiant/DOTween/DOTween46.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween50">
-      <HintPath>F:/unity Project/Other/Chat_System/Assets/Demigiant/DOTween/DOTween50.dll</HintPath>
-    </Reference>
-    <Reference Include="DemiLib">
-      <HintPath>F:/unity Project/Other/Chat_System/Assets/Demigiant/DemiLib/Core/DemiLib.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween43">
-      <HintPath>F:/unity Project/Other/Chat_System/Assets/Demigiant/DOTween/DOTween43.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween">
-      <HintPath>F:/unity Project/Other/Chat_System/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTweenPro">
-      <HintPath>F:/unity Project/Other/Chat_System/Assets/Demigiant/DOTweenPro/DOTweenPro.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>D:/unity 2018/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

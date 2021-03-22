@@ -66,6 +66,9 @@ public class MainPanel : BasePanel
     private void OnClickFriendBtn()
     {
         HideAnimation(friendImg);
+
+        // 播放动画后push
+        Invoke("PushFriendPanel", 0.2f);
     }
 
     /// <summary>
@@ -74,6 +77,29 @@ public class MainPanel : BasePanel
     private void OnClickFriendQBtn()
     {
         HideAnimation(friendQImg);
+
+        // 播放动画后push
+        Invoke("PushFriendQPanel", 0.2f);
+    }
+
+    /// <summary>
+    /// 点击push friendPanel
+    /// </summary>
+    /// <param name="uIPanelType"></param>
+    private void PushFriendPanel()
+    {
+        uiMng.PopPanel();
+        uiMng.PushPanel(UIPanelType.FriendPanel);
+    }
+
+    /// <summary>
+    /// 点击push FriendQPanel
+    /// </summary>
+    /// <param name="uIPanelType"></param>
+    private void PushFriendQPanel()
+    {
+        uiMng.PopPanel();
+        uiMng.PushPanel(UIPanelType.FriendQPanel);
     }
 
     /// <summary>

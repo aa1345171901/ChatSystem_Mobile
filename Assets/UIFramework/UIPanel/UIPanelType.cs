@@ -7,6 +7,8 @@ public enum UIPanelType
         None,
         LoginPanel,
         MessagePanel,
-        MainPanel,
         RegisterPanel,
+        MainPanel,
+        FriendPanel,
+        FriendQPanel,
 }
