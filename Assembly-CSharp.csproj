@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Assets\Demigiant\DOTweenPro\DOTweenAnimation.cs" />
     <Compile Include="Assets\Scripts\Facade.cs" />
+    <Compile Include="Assets\Scripts\Helper\DataHelper.cs" />
     <Compile Include="Assets\Scripts\ItemOther\InputFieldImg.cs" />
     <Compile Include="Assets\Scripts\ItemOther\loginGif.cs" />
     <Compile Include="Assets\Scripts\Manager\BaseManager.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Assets\Scripts\Panel\MessagePanel.cs" />
     <Compile Include="Assets\Scripts\Panel\RegisterPanel.cs" />
     <Compile Include="Assets\Scripts\Request\BaseRequest.cs" />
+    <Compile Include="Assets\Scripts\Request\GetFriendListRequest.cs" />
     <Compile Include="Assets\Scripts\Request\LoginRequest.cs" />
     <Compile Include="Assets\Scripts\Request\RegisterRequest.cs" />
     <Compile Include="Assets\UIFramework\Base\BasePanel.cs" />

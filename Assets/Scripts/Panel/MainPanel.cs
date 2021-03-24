@@ -11,6 +11,8 @@ public class MainPanel : BasePanel
     private GameObject friendImg;
     private GameObject friendQImg;
 
+    private RectTransform content;
+
     private void Awake()
     {
         // 获取游戏物体
@@ -22,6 +24,14 @@ public class MainPanel : BasePanel
         friendImg.GetComponent<Button>().onClick.AddListener(OnClickFriendBtn);
         friendQImg.GetComponent<Button>().onClick.AddListener(OnClickFriendQBtn);
 
+        content = transform.Find("Scroll View/Viewport/Content").GetComponent<RectTransform>();
+
+    }
+
+    private void Start()
+    {
+        GameObject go = Instantiate(Resources.Load<GameObject>("Item/InputField"));
+        go.transform.SetParent(content, false);
     }
 
     /// <summary>
@@ -29,6 +39,7 @@ public class MainPanel : BasePanel
     /// </summary>
     public override void OnEnter()
     {
+        gameObject.SetActive(true);
         friendImg.transform.localScale = new Vector3(1, 1, 1);
         friendQImg.transform.localScale = new Vector3(1, 1, 1);
         EnterAnimation(messageImg);
@@ -39,9 +50,7 @@ public class MainPanel : BasePanel
     /// </summary>
     public override void OnResume()
     {
-        friendImg.transform.localScale = new Vector3(1, 1, 1);
-        friendQImg.transform.localScale = new Vector3(1, 1, 1);
-        EnterAnimation(messageImg);
+        gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -49,6 +58,7 @@ public class MainPanel : BasePanel
     /// </summary>
     public override void OnExit()
     {
+        gameObject.SetActive(false);
         HideAnimation(messageImg);
     }
 
@@ -57,7 +67,7 @@ public class MainPanel : BasePanel
     /// </summary>
     public override void OnPause()
     {
-        HideAnimation(messageImg);
+        gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -68,7 +78,7 @@ public class MainPanel : BasePanel
         HideAnimation(friendImg);
 
         // 播放动画后push
-        Invoke("PushFriendPanel", 0.2f);
+        Invoke("PushFriendPanel", 0.1f);
     }
 
     /// <summary>
@@ -108,7 +118,7 @@ public class MainPanel : BasePanel
     public void EnterAnimation(GameObject go)
     {
         go.transform.localScale = new Vector3(0, 0, 0);
-        go.transform.DOScale(1, 0.5f);
+        go.transform.DOScale(1, 0.2f);
     }
 
     /// <summary>
@@ -116,6 +126,6 @@ public class MainPanel : BasePanel
     /// </summary>
     public void HideAnimation(GameObject go)
     {
-        Tween tween = go.transform.DOScale(0, 0.2f);
+        Tween tween = go.transform.DOScale(0, 0.1f);
     }
 }

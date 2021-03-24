@@ -56,4 +56,15 @@ public class UserData
     /// 添加好友策略Id
     /// </summary>
     public int FriendshipPolicyId { get; set; }
+
+    /// <summary>
+    /// 获取用户id
+    /// </summary>
+    public int GetId
+    {
+        get
+        {
+            return LoginId;
+        }
+    }
 }

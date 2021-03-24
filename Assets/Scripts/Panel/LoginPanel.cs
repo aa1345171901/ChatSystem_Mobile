@@ -96,6 +96,7 @@ public class LoginPanel : BasePanel
         }
         else
         {
+            uiMng.PopPanel();
             uiMng.PushPanelSync(UIPanelType.MainPanel);
         }
     }

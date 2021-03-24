@@ -10,12 +10,17 @@ public class FriendQPanel : BasePanel
     private GameObject friendImg;
     private GameObject friendQImg;
 
+    private Button friendNewsBtn;
+
     private void Awake()
     {
         // 获取游戏物体
         messageImg = GameObject.Find("DownColumn/messageButton2");
         friendImg = GameObject.Find("DownColumn/friendButton2");
         friendQImg = GameObject.Find("DownColumn/friendQButton2");
+
+        friendNewsBtn = transform.Find("Scroll View/Viewport/Content/FriendNews").GetComponent<Button>();
+        friendNewsBtn.onClick.AddListener(OnClickFriendNews);
 
         // 给物体添加事件
         messageImg.GetComponent<Button>().onClick.AddListener(OnClickMainBtn);
@@ -28,6 +33,7 @@ public class FriendQPanel : BasePanel
     /// </summary>
     public override void OnEnter()
     {
+        gameObject.SetActive(true);
         messageImg.transform.localScale = new Vector3(1, 1, 1);
         friendImg.transform.localScale = new Vector3(1, 1, 1);
         EnterAnimation(friendQImg);
@@ -38,9 +44,7 @@ public class FriendQPanel : BasePanel
     /// </summary>
     public override void OnResume()
     {
-        messageImg.transform.localScale = new Vector3(1, 1, 1);
-        friendImg.transform.localScale = new Vector3(1, 1, 1);
-        EnterAnimation(friendQImg);
+        gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -48,6 +52,7 @@ public class FriendQPanel : BasePanel
     /// </summary>
     public override void OnExit()
     {
+        gameObject.SetActive(false);
         HideAnimation(friendQImg);
     }
 
@@ -56,7 +61,7 @@ public class FriendQPanel : BasePanel
     /// </summary>
     public override void OnPause()
     {
-        HideAnimation(friendQImg);
+        gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -67,7 +72,7 @@ public class FriendQPanel : BasePanel
         HideAnimation(messageImg);
 
         // 播放动画后push
-        Invoke("PushMainPanel", 0.2f);
+        Invoke("PushMainPanel", 0.1f);
     }
 
     /// <summary>
@@ -78,7 +83,7 @@ public class FriendQPanel : BasePanel
         HideAnimation(friendImg);
 
         // 播放动画后push
-        Invoke("PushFriendPanel", 0.2f);
+        Invoke("PushFriendPanel", 0.1f);
     }
 
     /// <summary>
@@ -107,7 +112,7 @@ public class FriendQPanel : BasePanel
     public void EnterAnimation(GameObject go)
     {
         go.transform.localScale = new Vector3(0, 0, 0);
-        go.transform.DOScale(1, 0.5f);
+        go.transform.DOScale(1, 0.2f);
     }
 
     /// <summary>
@@ -115,6 +120,14 @@ public class FriendQPanel : BasePanel
     /// </summary>
     public void HideAnimation(GameObject go)
     {
-        Tween tween = go.transform.DOScale(0, 0.2f);
+        Tween tween = go.transform.DOScale(0, 0.1f);
+    }
+
+    /// <summary>
+    /// 好友动态点击
+    /// </summary>
+    private void OnClickFriendNews()
+    {
+        uiMng.ShowMessage("暂未开发该功能,,ԾㅂԾ,,");
     }
 }
