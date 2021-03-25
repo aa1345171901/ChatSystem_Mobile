@@ -1,5 +1,6 @@
 ﻿using Common;
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,11 +13,14 @@ public class FriendPanel : BasePanel
     private GameObject friendQImg;
 
     private RectTransform content;
+    private Transform reflash;   // 用于获取更新的panel位置，下拉更新
 
     private GetFriendListRequest getFriendListRequest;   // 获取好友列表的request
 
     private Dictionary<int, (string, int)> FriendDic = null;   // 用于设置好友列表 <账号，(昵称，头像ID)>
     private List<GameObject> friendGOs = new List<GameObject>();   // 好友列表Item列表，刷新时先删除
+
+    private bool isSF = false;    // 判断是否释放，不能发送请求太快 
 
     private void Awake()
     {
@@ -32,6 +36,7 @@ public class FriendPanel : BasePanel
         getFriendListRequest = GetComponent<GetFriendListRequest>();
 
         content = transform.Find("Scroll View/Viewport/Content").GetComponent<RectTransform>();
+        reflash = transform.Find("Scroll View/Viewport/Reflash").GetComponent<Transform>();
     }
 
     /// <summary>
@@ -39,10 +44,27 @@ public class FriendPanel : BasePanel
     /// </summary>
     private void Start()
     {
-        GameObject go = Instantiate(Resources.Load<GameObject>("Item/InputField"));
-        go.transform.SetParent(content,false);
+        GameObject goSearch = Instantiate(Resources.Load<GameObject>("Item/InputField"));
+        goSearch.transform.SetParent(content,false);
 
-        GetFriendList();
+        // 设置layout空隙
+        GameObject space = Instantiate(Resources.Load<GameObject>("Item/Spacing"));
+        space.transform.SetParent(content, false);
+
+        GameObject goNewFriend = Instantiate(Resources.Load<GameObject>("Item/NewFriend"));
+        goNewFriend.transform.SetParent(content, false);
+
+        // 设置layout空隙
+        space = Instantiate(Resources.Load<GameObject>("Item/Spacing"));
+        space.transform.SetParent(content, false);
+
+        // 获取本地的好友列表
+        string friendsStr = PlayerPrefs.GetString("friends");
+        if (!string.IsNullOrEmpty(friendsStr))
+        {
+            Debug.Log(friendsStr);
+            FriendDic = DataHelper.StringToDic(friendsStr);
+        }
     }
 
     /// <summary>
@@ -50,9 +72,26 @@ public class FriendPanel : BasePanel
     /// </summary>
     private void Update()
     {
+        // 释放立即更新好友列表
+        if (content.localPosition.y < -50)
+        {
+            isSF = true;
+        }
+        if (content.localPosition.y >= -5 && isSF)
+        {
+            isSF = false;
+            GetFriendList();
+            DateTime ReTime = DateTime.Now;
+            string ReTimeStr = "    " + ReTime.Hour + " : " + ReTime.Minute + "\n" + ReTime.Year + " / " + ReTime.Month + " / " + ReTime.Day;
+            PlayerPrefs.SetString("ReTime", ReTimeStr);
+        }
+
         if (FriendDic != null)
         {
             SetFriendItem();
+
+            // 将friends保存到本地，不刷新时就可以不访问服务器
+            PlayerPrefs.SetString("friends", DataHelper.DicToString(FriendDic));
             FriendDic = null;
         }
     }
@@ -200,10 +239,15 @@ public class FriendPanel : BasePanel
             if (index < friendGOs.Count)
             {
                 go = friendGOs[index++];
+                go.SetActive(true);
             }
             else
             {
                 go = Instantiate(Resources.Load<GameObject>("Item/Friend"));
+                friendGOs.Add(go);
+
+                // 不自增只能生成一个物体
+                index++;
             }
             string nickName = item.Value.Item1;
             int faceId = item.Value.Item2;

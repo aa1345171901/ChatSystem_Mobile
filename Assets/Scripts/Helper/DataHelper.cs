@@ -92,7 +92,7 @@ public class DataHelper
         Dictionary<int, (string, int)> returnDic = new Dictionary<int, (string, int)>();
         int index = 0;
         string[] strs = data.Split(',');
-        while (index < strs.Length)
+        while (index < strs.Length - 1)
         {
             returnDic.Add(int.Parse(strs[index++]), (strs[index++], int.Parse(strs[index++])));
         }

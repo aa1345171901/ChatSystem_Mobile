@@ -32,6 +32,10 @@ public class MainPanel : BasePanel
     {
         GameObject go = Instantiate(Resources.Load<GameObject>("Item/InputField"));
         go.transform.SetParent(content, false);
+
+        // 设置layout空隙
+        GameObject space = Instantiate(Resources.Load<GameObject>("Item/Spacing"));
+        space.transform.SetParent(content, false);
     }
 
     /// <summary>

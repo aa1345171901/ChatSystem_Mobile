@@ -12,6 +12,8 @@ public class FriendQPanel : BasePanel
 
     private Button friendNewsBtn;
 
+    private RectTransform content;
+
     private void Awake()
     {
         // 获取游戏物体
@@ -26,6 +28,7 @@ public class FriendQPanel : BasePanel
         messageImg.GetComponent<Button>().onClick.AddListener(OnClickMainBtn);
         friendImg.GetComponent<Button>().onClick.AddListener(OnClickFriendBtn);
 
+        content = transform.Find("Scroll View/Viewport/Content").GetComponent<RectTransform>();
     }
 
     /// <summary>
