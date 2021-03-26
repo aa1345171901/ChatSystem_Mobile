@@ -62,7 +62,6 @@ public class FriendPanel : BasePanel
         string friendsStr = PlayerPrefs.GetString("friends");
         if (!string.IsNullOrEmpty(friendsStr))
         {
-            Debug.Log(friendsStr);
             FriendDic = DataHelper.StringToDic(friendsStr);
         }
     }

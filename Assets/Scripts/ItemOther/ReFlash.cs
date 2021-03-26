@@ -40,6 +40,7 @@ public class ReFlash : MonoBehaviour
         {
             this.transform.position = startPos;
             showText.text = "下拉更新";
+            timeText.text = PlayerPrefs.GetString("ReTime") is null ? "暂无" : PlayerPrefs.GetString("ReTime");
         }
     }
 }
