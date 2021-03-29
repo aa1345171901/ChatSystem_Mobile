@@ -12,6 +12,8 @@ public class FriendPanel : BasePanel
     private GameObject friendImg;
     private GameObject friendQImg;
 
+    private Image face;
+
     private RectTransform content;
     private Transform reflash;   // 用于获取更新的panel位置，下拉更新
 
@@ -35,8 +37,11 @@ public class FriendPanel : BasePanel
 
         getFriendListRequest = GetComponent<GetFriendListRequest>();
 
+        // 获取组件
         content = transform.Find("Scroll View/Viewport/Content").GetComponent<RectTransform>();
         reflash = transform.Find("Scroll View/Viewport/Reflash").GetComponent<Transform>();
+
+        face = transform.Find("TopColumn/face").GetComponent<Image>();
     }
 
     /// <summary>
@@ -104,6 +109,11 @@ public class FriendPanel : BasePanel
         messageImg.transform.localScale = new Vector3(1, 1, 1);
         friendQImg.transform.localScale = new Vector3(1, 1, 1);
         EnterAnimation(friendImg);
+
+        // 给头像赋值
+        string facePath = "FaceImage/" + Facade.GetUserData().FaceId;
+        Sprite faceImg = Resources.Load<Sprite>(facePath);
+        face.sprite = faceImg;
     }
 
     /// <summary>

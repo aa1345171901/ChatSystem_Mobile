@@ -10,6 +10,8 @@ public class FriendQPanel : BasePanel
     private GameObject friendImg;
     private GameObject friendQImg;
 
+    private Image face;
+
     private Button friendNewsBtn;
 
     private RectTransform content;
@@ -28,7 +30,10 @@ public class FriendQPanel : BasePanel
         messageImg.GetComponent<Button>().onClick.AddListener(OnClickMainBtn);
         friendImg.GetComponent<Button>().onClick.AddListener(OnClickFriendBtn);
 
+        // 获取组件
         content = transform.Find("Scroll View/Viewport/Content").GetComponent<RectTransform>();
+
+        face = transform.Find("TopColumn/face").GetComponent<Image>();
     }
 
     /// <summary>
@@ -40,6 +45,11 @@ public class FriendQPanel : BasePanel
         messageImg.transform.localScale = new Vector3(1, 1, 1);
         friendImg.transform.localScale = new Vector3(1, 1, 1);
         EnterAnimation(friendQImg);
+
+        // 给头像赋值
+        string facePath = "FaceImage/" + Facade.GetUserData().FaceId;
+        Sprite faceImg = Resources.Load<Sprite>(facePath);
+        face.sprite = faceImg;
     }
 
     /// <summary>

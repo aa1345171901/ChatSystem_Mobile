@@ -13,6 +13,9 @@ public class MainPanel : BasePanel
 
     private RectTransform content;
 
+    private Text nickName;
+    private Image face;
+
     private void Awake()
     {
         // 获取游戏物体
@@ -24,8 +27,11 @@ public class MainPanel : BasePanel
         friendImg.GetComponent<Button>().onClick.AddListener(OnClickFriendBtn);
         friendQImg.GetComponent<Button>().onClick.AddListener(OnClickFriendQBtn);
 
+        // 寻找组件
         content = transform.Find("Scroll View/Viewport/Content").GetComponent<RectTransform>();
 
+        nickName = transform.Find("TopColumn/NickName").GetComponent<Text>();
+        face = transform.Find("TopColumn/face").GetComponent<Image>();
     }
 
     private void Start()
@@ -47,6 +53,15 @@ public class MainPanel : BasePanel
         friendImg.transform.localScale = new Vector3(1, 1, 1);
         friendQImg.transform.localScale = new Vector3(1, 1, 1);
         EnterAnimation(messageImg);
+
+        // 不在start赋值，可能更改个人消息
+        // 给nickName赋值
+        nickName.text = Facade.GetUserData().NickName;
+
+        // 给头像赋值
+        string facePath = "FaceImage/" + Facade.GetUserData().FaceId;
+        Sprite faceImg = Resources.Load<Sprite>(facePath);
+        face.sprite = faceImg;
     }
 
     /// <summary>
