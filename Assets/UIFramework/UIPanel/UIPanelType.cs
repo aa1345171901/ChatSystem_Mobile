@@ -12,4 +12,5 @@ public enum UIPanelType
         ChatPanel,
         FriendPanel,
         FriendQPanel,
+        AddFriendPanel,
 }
