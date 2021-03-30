@@ -26,6 +26,11 @@
     },
 
     {
+      "panelTypeString": "ChatPanel",
+      "path": "Panel/ChatPanel"
+    },
+
+    {
       "panelTypeString": "MessagePanel",
       "path": "Panel/MessagePanel"
     }

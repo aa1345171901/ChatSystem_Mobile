@@ -9,6 +9,7 @@ public enum UIPanelType
         MessagePanel,
         RegisterPanel,
         MainPanel,
+        ChatPanel,
         FriendPanel,
         FriendQPanel,
 }

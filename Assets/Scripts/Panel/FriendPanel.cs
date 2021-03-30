@@ -121,7 +121,7 @@ public class FriendPanel : BasePanel
     /// </summary>
     public override void OnResume()
     {
-        gameObject.SetActive(true);
+        // gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -138,7 +138,7 @@ public class FriendPanel : BasePanel
     /// </summary>
     public override void OnPause()
     {
-        gameObject.SetActive(false);
+        // gameObject.SetActive(false);
     }
 
     /// <summary>

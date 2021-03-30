@@ -63,6 +63,7 @@
     <Compile Include="Assets\Demigiant\DOTweenPro\DOTweenAnimation.cs" />
     <Compile Include="Assets\Scripts\Facade.cs" />
     <Compile Include="Assets\Scripts\Helper\DataHelper.cs" />
+    <Compile Include="Assets\Scripts\ItemOther\ChatBtnClick.cs" />
     <Compile Include="Assets\Scripts\ItemOther\InputFieldImg.cs" />
     <Compile Include="Assets\Scripts\ItemOther\loginGif.cs" />
     <Compile Include="Assets\Scripts\ItemOther\ReFlash.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Assets\Scripts\Manager\RequestManager.cs" />
     <Compile Include="Assets\Scripts\Manager\UserManager.cs" />
     <Compile Include="Assets\Scripts\Model\UserData.cs" />
+    <Compile Include="Assets\Scripts\Panel\ChatPanel.cs" />
     <Compile Include="Assets\Scripts\Panel\FriendPanel.cs" />
     <Compile Include="Assets\Scripts\Panel\FriendQPanel.cs" />
     <Compile Include="Assets\Scripts\Panel\LoginPanel.cs" />

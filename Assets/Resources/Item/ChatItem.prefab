@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 3414516112618052105}
   - component: {fileID: 8500297234821284452}
   - component: {fileID: 8148207236385201878}
+  - component: {fileID: 2586858530354164647}
   m_Layer: 5
   m_Name: ChatItem
   m_TagString: Untagged
@@ -195,6 +196,18 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &2586858530354164647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4133206110472629707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9514ac13a715f549b96f3cb40be37a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5314732767775538687
 GameObject:
   m_ObjectHideFlags: 0

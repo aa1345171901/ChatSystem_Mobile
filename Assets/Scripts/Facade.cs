@@ -131,4 +131,20 @@ public class Facade : MonoBehaviour
     {
         return userManager.UserData;
     }
+
+    /// <summary>
+    /// panel入栈
+    /// </summary>
+    public void PushPanel(UIPanelType uiPanelType)
+    {
+        uiManager.PushPanel(uiPanelType);
+    }
+
+    /// <summary>
+    /// panel出栈
+    /// </summary>
+    public void PopPanel()
+    {
+        uiManager.PopPanel();
+    }
 }
