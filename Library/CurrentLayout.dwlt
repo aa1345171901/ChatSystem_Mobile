@@ -73,7 +73,7 @@ MonoBehaviour:
   m_MinSize: {x: 234, y: 498}
   m_MaxSize: {x: 10004, y: 14048}
   vertical: 1
-  controlID: 55
+  controlID: 25
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 498}
   m_MaxSize: {x: 18008, y: 14048}
   vertical: 0
-  controlID: 42
+  controlID: 12
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -240,8 +240,8 @@ MonoBehaviour:
     y: 0
     width: 280
     height: 635
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 277, y: 74}
+  m_MaxSize: {x: 4002, y: 4024}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -503,7 +503,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 00f4ffff2ef4ffffd6fbffffb62e0000
+      m_ExpandedIDs: d6fbffffbe2e0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -564,7 +564,8 @@ MonoBehaviour:
     m_SceneHandles: 
     m_ShowAllHits: 0
     m_SearchArea: 1
-    m_Folders: []
+    m_Folders:
+    - Assets/Resources/Panel
   m_ViewMode: 0
   m_StartGridSize: 58
   m_LastFolders: []
@@ -576,7 +577,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 24550000
     m_LastClickedID: 21796
-    m_ExpandedIDs: 0000000042280000f0280000fa2800002e2900000c2a0000322a0000762a0000442b0000782b0000922b0000d82b0000e62b0000202c0000342c0000d82c0000002d00002e2d0000542d0000f22d0000542e0000f22e0000f42e0000
+    m_ExpandedIDs: 0000000046280000f62800000029000034290000122a0000382a00007c2a00004a2b00007e2b0000982b0000de2b0000ec2b0000262c00003a2c0000de2c0000062d0000342d00005a2d0000f82d00005c2e0000fa2e0000fc2e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -601,24 +602,24 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 145}
+    scrollPos: {x: 0, y: 529}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff0000000042280000f0280000fa2800002e2900000c2a0000322a0000762a0000442b0000782b0000922b0000d82b0000e62b0000202c0000342c0000d82c0000002d00002e2d0000542d0000f22d0000542e0000f22e0000f42e0000
+    m_ExpandedIDs: ffffffff0000000046280000f62800000029000034290000122a0000382a00007c2a00004a2b00007e2b0000982b0000de2b0000ec2b0000262c00003a2c0000de2c0000062d0000342d00005a2d0000f82d00005c2e0000fa2e0000fc2e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: ChatPanel
+      m_OriginalName: ChatPanel
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 9774
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 2}
     m_SearchString: 

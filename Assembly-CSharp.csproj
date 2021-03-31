@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\Manager\RequestManager.cs" />
     <Compile Include="Assets\Scripts\Manager\UserManager.cs" />
     <Compile Include="Assets\Scripts\Model\UserData.cs" />
+    <Compile Include="Assets\Scripts\Panel\AddFriendPanel.cs" />
     <Compile Include="Assets\Scripts\Panel\ChatPanel.cs" />
     <Compile Include="Assets\Scripts\Panel\FriendPanel.cs" />
     <Compile Include="Assets\Scripts\Panel\FriendQPanel.cs" />

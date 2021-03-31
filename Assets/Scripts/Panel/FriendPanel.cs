@@ -24,6 +24,9 @@ public class FriendPanel : BasePanel
 
     private bool isSF = false;    // 判断是否释放，不能发送请求太快 
 
+    private Button addFriendImg;   // 右上角的好友添加按钮
+    private Button addFriendText;   // 列表的新朋友按钮
+
     private void Awake()
     {
         // 获取游戏物体
@@ -31,17 +34,21 @@ public class FriendPanel : BasePanel
         friendImg = GameObject.Find("DownColumn/friendButton1");
         friendQImg = GameObject.Find("DownColumn/friendQButton1");
 
+        // 获取组件
+        content = transform.Find("Scroll View/Viewport/Content").GetComponent<RectTransform>();
+        reflash = transform.Find("Scroll View/Viewport/Reflash").GetComponent<Transform>();
+
+        face = transform.Find("TopColumn/face").GetComponent<Image>();
+
+        addFriendImg = transform.Find("TopColumn/AddFriendBtn").GetComponent<Button>();
+
         // 给物体添加事件
         messageImg.GetComponent<Button>().onClick.AddListener(OnClickMainBtn);
         friendQImg.GetComponent<Button>().onClick.AddListener(OnClickFriendQBtn);
 
         getFriendListRequest = GetComponent<GetFriendListRequest>();
 
-        // 获取组件
-        content = transform.Find("Scroll View/Viewport/Content").GetComponent<RectTransform>();
-        reflash = transform.Find("Scroll View/Viewport/Reflash").GetComponent<Transform>();
-
-        face = transform.Find("TopColumn/face").GetComponent<Image>();
+        addFriendImg.onClick.AddListener(AddFriendClick);
     }
 
     /// <summary>
@@ -58,6 +65,10 @@ public class FriendPanel : BasePanel
 
         GameObject goNewFriend = Instantiate(Resources.Load<GameObject>("Item/NewFriend"));
         goNewFriend.transform.SetParent(content, false);
+        
+        // 给按钮添加事件
+        addFriendText = goNewFriend.GetComponent<Button>();
+        addFriendText.onClick.AddListener(AddFriendClick);
 
         // 设置layout空隙
         space = Instantiate(Resources.Load<GameObject>("Item/Spacing"));
@@ -279,5 +290,13 @@ public class FriendPanel : BasePanel
                 friendGOs[i].SetActive(false);
             }
         }
+    }
+
+    /// <summary>
+    /// 添加好友按钮点击
+    /// </summary>
+    private void AddFriendClick()
+    {
+        uiMng.PushPanel(UIPanelType.AddFriendPanel);
     }
 }
