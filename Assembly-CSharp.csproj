@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\Facade.cs" />
     <Compile Include="Assets\Scripts\Helper\DataHelper.cs" />
     <Compile Include="Assets\Scripts\ItemOther\ChatBtnClick.cs" />
+    <Compile Include="Assets\Scripts\ItemOther\FriendItem.cs" />
     <Compile Include="Assets\Scripts\ItemOther\InputFieldImg.cs" />
     <Compile Include="Assets\Scripts\ItemOther\loginGif.cs" />
     <Compile Include="Assets\Scripts\ItemOther\ReFlash.cs" />
@@ -75,11 +76,14 @@
     <Compile Include="Assets\Scripts\Model\UserData.cs" />
     <Compile Include="Assets\Scripts\Panel\AddFriendPanel.cs" />
     <Compile Include="Assets\Scripts\Panel\ChatPanel.cs" />
+    <Compile Include="Assets\Scripts\Panel\FriendDetailPanel.cs" />
     <Compile Include="Assets\Scripts\Panel\FriendPanel.cs" />
     <Compile Include="Assets\Scripts\Panel\FriendQPanel.cs" />
     <Compile Include="Assets\Scripts\Panel\LoginPanel.cs" />
     <Compile Include="Assets\Scripts\Panel\MainPanel.cs" />
     <Compile Include="Assets\Scripts\Panel\MessagePanel.cs" />
+    <Compile Include="Assets\Scripts\Panel\ModifyDetailPanel.cs" />
+    <Compile Include="Assets\Scripts\Panel\MyselfDetailPanel.cs" />
     <Compile Include="Assets\Scripts\Panel\RegisterPanel.cs" />
     <Compile Include="Assets\Scripts\Request\BaseRequest.cs" />
     <Compile Include="Assets\Scripts\Request\GetFriendListRequest.cs" />

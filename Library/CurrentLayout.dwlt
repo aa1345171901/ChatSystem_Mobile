@@ -73,7 +73,7 @@ MonoBehaviour:
   m_MinSize: {x: 234, y: 498}
   m_MaxSize: {x: 10004, y: 14048}
   vertical: 1
-  controlID: 25
+  controlID: 13
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -360,9 +360,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 76.954865, y: 207.11427, z: -1.875}
+    m_Target: {x: 128.88751, y: 267.9587, z: -2.125}
     speed: 2
-    m_Value: {x: 76.954865, y: 207.11427, z: -1.875}
+    m_Value: {x: 128.88751, y: 267.9587, z: -2.125}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -394,9 +394,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 647.6668
+    m_Target: 567.6061
     speed: 2
-    m_Value: 647.6668
+    m_Value: 567.6061
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -503,7 +503,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: d6fbffffbe2e0000
+      m_ExpandedIDs: 0a93ffff4895ffffd495ffff449dffff4a9dffff8cacffff98acffff94b1ffff1ac5ffffa6efffffd6fbffffc22e0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -565,7 +565,7 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Panel
+    - Assets/Scripts/Panel
   m_ViewMode: 0
   m_StartGridSize: 58
   m_LastFolders: []
@@ -577,7 +577,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 24550000
     m_LastClickedID: 21796
-    m_ExpandedIDs: 0000000046280000f62800000029000034290000122a0000382a00007c2a00004a2b00007e2b0000982b0000de2b0000ec2b0000262c00003a2c0000de2c0000062d0000342d00005a2d0000f82d00005c2e0000fa2e0000fc2e0000
+    m_ExpandedIDs: 0000000048280000f82800000229000036290000142a00003a2a00007e2a00004c2b0000802b00009a2b0000e02b0000ee2b0000282c00003c2c0000e02c0000082d0000362d00005c2d0000fa2d00005e2e0000fe2e0000002f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -602,21 +602,21 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 529}
+    scrollPos: {x: 0, y: 912}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff0000000046280000f62800000029000034290000122a0000382a00007c2a00004a2b00007e2b0000982b0000de2b0000ec2b0000262c00003a2c0000de2c0000062d0000342d00005a2d0000f82d00005c2e0000fa2e0000fc2e0000
+    m_ExpandedIDs: ffffffff0000000048280000f82800000229000036290000142a00003a2a00007e2a00004c2b0000802b00009a2b0000e02b0000ee2b0000282c00003c2c0000e02c0000082d0000362d00005c2d0000fa2d00005e2e0000fe2e0000002f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: ChatPanel
-      m_OriginalName: ChatPanel
+      m_Name: FriendDetailPanel
+      m_OriginalName: FriendDetailPanel
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 9774
+      m_UserData: 13556
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
