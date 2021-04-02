@@ -378,7 +378,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.0000012193498}
+  m_AnchoredPosition: {x: 0, y: 0.000015429294}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &5460253280711913296
@@ -520,7 +520,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 6548863880434281646}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9802022
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1151,6 +1151,7 @@ GameObject:
   - component: {fileID: 3751741942881769715}
   - component: {fileID: 8513242342175367245}
   - component: {fileID: 8513453113170876363}
+  - component: {fileID: 8717135744995697463}
   m_Layer: 5
   m_Name: AddFriendPanel
   m_TagString: Untagged
@@ -1227,6 +1228,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b885d0ed4df7bfc42acbc3bbc22b3481, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8717135744995697463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8687562409553554233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2566ea273e7e7640abc991d2e89f110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &9060424637429293324

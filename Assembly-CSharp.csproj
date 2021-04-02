@@ -89,6 +89,7 @@
     <Compile Include="Assets\Scripts\Request\GetFriendListRequest.cs" />
     <Compile Include="Assets\Scripts\Request\LoginRequest.cs" />
     <Compile Include="Assets\Scripts\Request\RegisterRequest.cs" />
+    <Compile Include="Assets\Scripts\Request\SearchFriendRequest.cs" />
     <Compile Include="Assets\UIFramework\Base\BasePanel.cs" />
     <Compile Include="Assets\UIFramework\Extension\DictionaryExtension.cs" />
     <Compile Include="Assets\UIFramework\UIManager.cs" />

@@ -138,4 +138,24 @@ public class DataHelper
     {
         return ds.GetXml();
     }
+
+    /// <summary>
+    /// 将dataSet的值取出转换为List
+    /// </summary>
+    /// <returns></returns>
+    public static List<List<string>> DataSetValueToList(DataSet ds)
+    {
+        List<List<string>> lists = new List<List<string>>();
+        foreach (DataRow item in ds.Tables[0].Rows)
+        {
+            List<string> list = new List<string>();
+            for (int i = 0; i < item.ItemArray.Length; i++)
+            {
+                list.Add(item.ItemArray[i].ToString());
+            }
+            lists.Add(list);
+        }
+
+        return lists;
+    }
 }
