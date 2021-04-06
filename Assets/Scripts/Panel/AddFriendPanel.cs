@@ -3,6 +3,7 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +11,8 @@ public class AddFriendPanel : BasePanel
 {
     private Button backBtn;
 
-    private SearchFriendRequest searchFriendRequest;
+    private SearchFriendRequest searchFriendRequest;  // 查找好友请求
+    private AddFriendRequest addFriendRequest;       // 添加好友请求
 
     private InputField inputField;  // 搜索组件
 
@@ -37,13 +39,6 @@ public class AddFriendPanel : BasePanel
     // Update is called once per frame
     void Update()
     {
-        // 按下进行搜索
-        if (Input.GetKeyDown(KeyCode.KeypadEnter))
-        {
-            OnSearchFriend();
-            inputField.text = "";
-        }
-
         // 异步展示搜索到的好友
         if (searchFriends != null)
         {
@@ -98,7 +93,7 @@ public class AddFriendPanel : BasePanel
     /// <summary>
     /// 搜索好友事件
     /// </summary>
-    private void OnSearchFriend()
+    public void OnSearchFriend()
     {
         // 搜索栏不为空就按昵称或id查找
         if (!string.IsNullOrEmpty(inputField.text))
@@ -215,6 +210,41 @@ public class AddFriendPanel : BasePanel
             {
                 friendGOs[i].SetActive(false);
             }
+        }
+    }
+
+    /// <summary>
+    /// 点击子物体的添加按钮
+    /// </summary>
+    public void OnClickAddFriendItem(string input)
+    {
+        try
+        {
+            Match m = Regex.Match(input, ".*?(.*?)");
+            int friendId = int.Parse(m.Groups[1].Value);
+            int id = Facade.Instance.GetUserData().LoginId;
+            string data = id + "," + friendId;
+
+            addFriendRequest.SendRequest(data);
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log("添加失败:" + e.Message);
+        }
+    }
+
+    /// <summary>
+    /// 添加好友请求回应
+    /// </summary>
+    public void OnResponseAddFriend(ReturnCode returnCode, string result)
+    {
+        if (returnCode == ReturnCode.Success)
+        {
+            uiMng.ShowMessageSync("添加成功：请刷新查看");
+        }
+        else
+        {
+            uiMng.ShowMessageSync("添加失败：" + result);
         }
     }
 }

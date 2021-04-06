@@ -9,9 +9,11 @@ public class InputFieldImg : MonoBehaviour
 {
     private Image searchImage;
     private InputField inputField;
+    private AddFriendPanel addFriendPanel;
 
     private void Start()
     {
+        // 获取物体组件
         searchImage = transform.Find("Placeholder/Image").GetComponent<Image>();
         inputField = GetComponent<InputField>();
     }
@@ -52,5 +54,19 @@ public class InputFieldImg : MonoBehaviour
     public void InputFieldEdit()
     {
         searchImage.enabled = true;
+    }
+
+    /// <summary>
+    /// 好友申请搜索按钮编辑完成
+    /// </summary>
+    public void FriendSearchInputFieldSubmit()
+    {
+        if (addFriendPanel == null)
+        {
+            addFriendPanel = GetComponentInParent<AddFriendPanel>();
+        }
+        searchImage.enabled = true;
+        inputField.text = "";
+        addFriendPanel.OnSearchFriend();
     }
 }
