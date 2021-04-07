@@ -61,12 +61,9 @@ public class InputFieldImg : MonoBehaviour
     /// </summary>
     public void FriendSearchInputFieldSubmit()
     {
-        if (addFriendPanel == null)
-        {
-            addFriendPanel = GetComponentInParent<AddFriendPanel>();
-        }
+        addFriendPanel = GetComponentInParent<AddFriendPanel>();
         searchImage.enabled = true;
-        inputField.text = "";
         addFriendPanel.OnSearchFriend();
+        inputField.text = "";
     }
 }

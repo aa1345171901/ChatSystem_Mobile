@@ -189,7 +189,7 @@ public class AddFriendPanel : BasePanel
                 // 不自增只能生成一个物体
                 index++;
             }
-            string nickName = item[1] + "   ( " + item[0] + " )";
+            string nickName = item[1] + "   [ " + item[0] + " ]";
             int faceId = 0;
             int.TryParse(item[4], out faceId);
 
@@ -220,8 +220,8 @@ public class AddFriendPanel : BasePanel
     {
         try
         {
-            Match m = Regex.Match(input, ".*?(.*?)");
-            int friendId = int.Parse(m.Groups[1].Value);
+            Match m = Regex.Match(input, "\\w*\\[ (.*?) \\]");
+            int friendId = int.Parse(m.Groups[0].Value);
             int id = Facade.Instance.GetUserData().LoginId;
             string data = id + "," + friendId;
 
