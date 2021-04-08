@@ -9,7 +9,7 @@ public class AddFriendItem : MonoBehaviour
     private Text detailData;     // 好友的昵称(账号)
     private Button addFriendBtn;   // 添加好友item后面的添加按钮
 
-    private AddFriendPanel addFriendPanel;
+    public AddFriendPanel addFriendPanel;
 
     // Start is called before the first frame update
     void Start()

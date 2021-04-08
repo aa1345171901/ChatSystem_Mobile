@@ -28,6 +28,8 @@ public class AddFriendPanel : BasePanel
         backBtn = this.transform.Find("AddTopCloumn/back").GetComponent<Button>();
 
         searchFriendRequest = GetComponent<SearchFriendRequest>();
+        addFriendRequest = GetComponent<AddFriendRequest>();
+
         inputField = transform.Find("AddTopCloumn/InputField").GetComponent<InputField>();
 
         content = transform.Find("Scroll View/Viewport/Content").GetComponent<RectTransform>();
@@ -43,6 +45,7 @@ public class AddFriendPanel : BasePanel
         if (searchFriends != null)
         {
             SetAddFriendItem();
+            // SendMessageUpwards("SetAddFriendPanel", this);
             searchFriends = null;
         }
     }
@@ -220,9 +223,9 @@ public class AddFriendPanel : BasePanel
     {
         try
         {
-            Match m = Regex.Match(input, "\\w*\\[ (.*?) \\]");
-            int friendId = int.Parse(m.Groups[0].Value);
-            int id = Facade.Instance.GetUserData().LoginId;
+            Match m = Regex.Match(input, "\\[( .*? )\\]");
+            int friendId = int.Parse(m.Groups[1].Value);
+            int id = _facade.GetUserData().LoginId;
             string data = id + "," + friendId;
 
             addFriendRequest.SendRequest(data);
