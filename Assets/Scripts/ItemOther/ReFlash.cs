@@ -21,7 +21,7 @@ public class ReFlash : MonoBehaviour
         showText = this.transform.Find("showText").GetComponent<Text>();
         timeText = this.transform.Find("timeText").GetComponent<Text>();
 
-        timeText.text = PlayerPrefs.GetString("ReTime") is null ? "暂无" : PlayerPrefs.GetString("ReTime");
+        timeText.text = PlayerPrefs.GetString(Facade.Instance.GetUserData().LoginId + ",ReTime") is null ? "暂无" : PlayerPrefs.GetString(Facade.Instance.GetUserData().LoginId + ",ReTime");
     }
 
     // Update is called once per frame
@@ -40,7 +40,7 @@ public class ReFlash : MonoBehaviour
         {
             this.transform.position = startPos;
             showText.text = "下拉更新";
-            timeText.text = PlayerPrefs.GetString("ReTime") is null ? "暂无" : PlayerPrefs.GetString("ReTime");
+            timeText.text = PlayerPrefs.GetString(Facade.Instance.GetUserData().LoginId + ",ReTime") is null ? "暂无" : PlayerPrefs.GetString(Facade.Instance.GetUserData().LoginId + ",ReTime");
         }
     }
 }

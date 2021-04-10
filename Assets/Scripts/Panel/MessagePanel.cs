@@ -8,7 +8,14 @@ public class MessagePanel : BasePanel
     private Text text;
 
     private float showTime = 1;
-    private string message = null;
+    private string message = "";
+
+    private Vector3 originPos;   // panel的初始位置
+
+    public void Start()
+    {
+        originPos = transform.position;
+    }
 
     public override void OnEnter()
     {
@@ -24,10 +31,10 @@ public class MessagePanel : BasePanel
     /// </summary>
     private void Update()
     {
-        if (message != null)
+        if (message != "")
         {
             ShowMessage(message);
-            message = null;
+            message = "";
         }
     }
 
@@ -44,7 +51,7 @@ public class MessagePanel : BasePanel
     /// </summary>
     public void ShowMessage(string msg)
     {
-        gameObject.SetActive(true);
+        transform.position = originPos;
 
         // 设置messagepanel为最后渲染
         int count = transform.parent.childCount - 1;//Panel移位
@@ -62,6 +69,6 @@ public class MessagePanel : BasePanel
     private void Hide()
     {
         text.CrossFadeAlpha(0, 1, false);
-        gameObject.SetActive(false);
+        transform.position = new Vector3(-300, 0 ,0);
     }
 }

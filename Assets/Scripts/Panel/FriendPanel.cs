@@ -75,7 +75,7 @@ public class FriendPanel : BasePanel
         space.transform.SetParent(content, false);
 
         // 获取本地的好友列表
-        string friendsStr = PlayerPrefs.GetString("friends");
+        string friendsStr = PlayerPrefs.GetString(Facade.GetUserData().LoginId + ",friends");
         if (!string.IsNullOrEmpty(friendsStr))
         {
             FriendDic = DataHelper.StringToDic(friendsStr);
@@ -98,7 +98,7 @@ public class FriendPanel : BasePanel
             GetFriendList();
             DateTime ReTime = DateTime.Now;
             string ReTimeStr = "    " + ReTime.Hour + " : " + ReTime.Minute + "\n" + ReTime.Year + " / " + ReTime.Month + " / " + ReTime.Day;
-            PlayerPrefs.SetString("ReTime", ReTimeStr);
+            PlayerPrefs.SetString(Facade.GetUserData().LoginId + ",ReTime", ReTimeStr);   // 通过id区分不同的账号刷新时间
         }
 
         if (FriendDic != null)
@@ -106,7 +106,7 @@ public class FriendPanel : BasePanel
             SetFriendItem();
 
             // 将friends保存到本地，不刷新时就可以不访问服务器
-            PlayerPrefs.SetString("friends", DataHelper.DicToString(FriendDic));
+            PlayerPrefs.SetString(Facade.GetUserData().LoginId + ",friends", DataHelper.DicToString(FriendDic));
             FriendDic = null;
         }
     }
