@@ -13,4 +13,7 @@ public enum UIPanelType
         FriendPanel,
         FriendQPanel,
         AddFriendPanel,
+        FriendDetailPanel,
+        ModifyDetailPanel,
+        MyselfDetailPanel,
 }

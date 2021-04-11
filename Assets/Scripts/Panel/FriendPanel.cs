@@ -299,4 +299,44 @@ public class FriendPanel : BasePanel
     {
         uiMng.PushPanel(UIPanelType.AddFriendPanel);
     }
+
+    /// <summary>
+    /// 跟随滑动
+    /// </summary>
+    /// <param name="offset"></param>
+    public void OnFingerMove(int offset)
+    {
+        // 向右滑
+        if (offset > 0)
+        {
+            offset = offset > 300 ? 300 : offset;
+            this.transform.localPosition = new Vector3(offset, 0, 0);
+        }
+        else
+        {
+            offset = offset < -300 ? -300 : offset;
+            // 当panel在右边才能向左滑
+            if (this.transform.localPosition.x > 0)
+            {
+                this.transform.localPosition = new Vector3(300 + offset, 0, 0);
+            }
+        }
+
+    }
+
+    /// <summary>
+    /// 手指右滑事件,判断是否满足右滑距离
+    /// </summary>
+    public void OnFingerAction(bool isMove)
+    {
+        if (isMove)
+        {
+            Tween t = this.transform.DOLocalMoveX(300, 0.2f);
+            // t.OnComplete(() => gameObject.SetActive(false));
+        }
+        else
+        {
+            this.transform.DOLocalMoveX(0, 0.2f);
+        }
+    }
 }

@@ -63,6 +63,7 @@
     <Compile Include="Assets\Demigiant\DOTweenPro\DOTweenAnimation.cs" />
     <Compile Include="Assets\Scripts\Facade.cs" />
     <Compile Include="Assets\Scripts\Helper\DataHelper.cs" />
+    <Compile Include="Assets\Scripts\Helper\ScreenSwipe.cs" />
     <Compile Include="Assets\Scripts\ItemOther\AddFriendItem.cs" />
     <Compile Include="Assets\Scripts\ItemOther\ChatBtnClick.cs" />
     <Compile Include="Assets\Scripts\ItemOther\FriendItem.cs" />

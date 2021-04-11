@@ -36,6 +36,21 @@
     },
 
     {
+      "panelTypeString": "FriendDetailPanel",
+      "path": "Panel/FriendDetailPanel"
+    },
+
+    {
+      "panelTypeString": "MyselfDetailPanel",
+      "path": "Panel/MyselfDetailPanel"
+    },
+
+    {
+      "panelTypeString": "ModifyDetailPanel",
+      "path": "Panel/ModifyDetailPanel"
+    },
+
+    {
       "panelTypeString": "MessagePanel",
       "path": "Panel/MessagePanel"
     }

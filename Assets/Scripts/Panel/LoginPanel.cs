@@ -35,6 +35,7 @@ public class LoginPanel : BasePanel
 
         findPassWord = transform.Find("FindPassword").GetComponent<Button>();
         findPassWord.onClick.AddListener(OnFindPassWordClick);
+
     }
 
     /// <summary>
@@ -45,8 +46,13 @@ public class LoginPanel : BasePanel
         if (Facade.GetUserData().LoginId != 0)
         {
             userIdIF.text = Facade.GetUserData().LoginId.ToString();
-            Debug.Log(Facade.GetUserData().LoginId.ToString());
         }
+    }
+
+    public override void OnPause()
+    {
+        base.OnPause();
+        gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -96,7 +102,6 @@ public class LoginPanel : BasePanel
         }
         else
         {
-            uiMng.PopPanel();
             uiMng.PushPanelSync(UIPanelType.MainPanel);
         }
     }
