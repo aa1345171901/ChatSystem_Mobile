@@ -60,7 +60,6 @@ public class UIManager : BaseManager
     {
         base.OnInit();
         PushPanel(UIPanelType.MessagePanel);
-        PushPanel(UIPanelType.MyselfDetailPanel);
         PushPanel(UIPanelType.LoginPanel);
     }
 

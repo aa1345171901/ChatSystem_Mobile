@@ -40,9 +40,13 @@ public class ScreenSwipe : MonoBehaviour
         {
             if (fingerTouchState == FINGER_STATE_NULL)
             {
-                fingerTouchState = FINGER_STATE_TOUCH;
-                fingerBeginX = Input.mousePosition.x;
                 fingerBeginY = Input.mousePosition.y;
+                fingerBeginX = Input.mousePosition.x;
+                if (fingerBeginY < 80)
+                {
+                    return;
+                }
+                fingerTouchState = FINGER_STATE_TOUCH;
             }
         }
 
@@ -78,18 +82,18 @@ public class ScreenSwipe : MonoBehaviour
         {
             SendMessage("OnFingerAction", true);
         }
-        else if(fingerSegmentX > 0)
-        {
-            SendMessage("OnFingerAction", false);
-        }
-
         if (fingerSegmentX < -fingerActionSensitivity)
         {
             SendMessage("OnFingerAction", false);
         }
-        else if (fingerSegmentX > 0)
+        if (fingerSegmentX < fingerActionSensitivity && fingerSegmentX > 0)
+        {
+            SendMessage("OnFingerAction", false);
+        }
+        if (fingerSegmentX > -fingerActionSensitivity && fingerSegmentX < 0)
         {
             SendMessage("OnFingerAction", true);
         }
+
     }
 }

@@ -102,7 +102,7 @@ public class LoginPanel : BasePanel
         }
         else
         {
-            uiMng.PushPanelSync(UIPanelType.MainPanel);
+            uiMng.PushPanelSync(UIPanelType.MyselfDetailPanel);
         }
     }
 

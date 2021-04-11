@@ -2,19 +2,75 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MyselfDetailPanel : BasePanel
 {
+    // 各类显示UI
+    private Text nickName;
+    private Text idText;
+    private Text sex;
+    private Text age;
+    private Text star;
+    private Text bloodType;
+    private Text realName;
+    private Image faceImage;
+
+    private Button modifyDeatilBtn;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        // 获取组件
+        nickName = transform.Find("NickName").GetComponent<Text>();
+        idText = transform.Find("IdText").GetComponent<Text>();
+        sex = transform.Find("bg-down/Sex").GetComponent<Text>();
+        age = transform.Find("bg-down/Age").GetComponent<Text>();
+        star = transform.Find("bg-down/Star").GetComponent<Text>();
+        bloodType = transform.Find("bg-down/Blood").GetComponent<Text>();
+        realName = transform.Find("bg-down/RealName").GetComponent<Text>();
+        faceImage = transform.Find("FaceMask/Image").GetComponent<Image>();
+
+        modifyDeatilBtn = transform.Find("Button").GetComponent<Button>();
+
+        // 添加事件
+        modifyDeatilBtn.onClick.AddListener(OnClickModifyBtn);
+
+        // 为组件设置值
+        UserData userData = Facade.GetUserData();
+        nickName.text = userData.NickName;
+        idText.text = "账号 : " + userData.LoginId;
+        sex.text = "性别 : " + userData.Sex;
+        age.text = "年龄 : " + userData.Age;
+        star.text = "星座 : " + userData.StarId;
+        bloodType.text = "血型 : " + userData.BloodTypeId;
+        realName.text = "真实姓名 : " + userData.Name;
+
+        // 给头像赋值
+        string facePath = "FaceImage/" + Facade.GetUserData().FaceId;
+        Sprite faceImg = Resources.Load<Sprite>(facePath);
+        faceImage.sprite = faceImg;
+
+        uiMng.PushPanel(UIPanelType.MainPanel);
+    }
+
+    public override void OnEnter()
+    {
+
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    /// <summary>
+    /// 编辑资料点击
+    /// </summary>
+    private void OnClickModifyBtn()
+    {
+        uiMng.PushPanel(UIPanelType.ModifyDetailPanel);
     }
 
     /// <summary>
