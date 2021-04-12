@@ -18,6 +18,8 @@ public class MyselfDetailPanel : BasePanel
 
     private Button modifyDeatilBtn;
 
+    private ScreenSwipe screenSwipe;  // 控制panel移动的脚本
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +34,8 @@ public class MyselfDetailPanel : BasePanel
         faceImage = transform.Find("FaceMask/Image").GetComponent<Image>();
 
         modifyDeatilBtn = transform.Find("Button").GetComponent<Button>();
+
+        screenSwipe = GetComponent<ScreenSwipe>();
 
         // 添加事件
         modifyDeatilBtn.onClick.AddListener(OnClickModifyBtn);
@@ -56,7 +60,25 @@ public class MyselfDetailPanel : BasePanel
 
     public override void OnEnter()
     {
+        
+    }
 
+    /// <summary>
+    /// 暂停时该script不能使用，以免移动该panel
+    /// </summary>
+    public override void OnPause()
+    {
+        base.OnPause();
+        //screenSwipe.enabled = false;
+    }
+
+    /// <summary>
+    /// 重启时启动该脚本
+    /// </summary>
+    public override void OnResume()
+    {
+        base.OnResume();
+        //screenSwipe.enabled = true;
     }
 
     // Update is called once per frame

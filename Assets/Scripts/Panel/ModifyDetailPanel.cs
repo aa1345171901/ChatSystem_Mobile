@@ -10,6 +10,8 @@ public class ModifyDetailPanel : BasePanel
     private Dropdown starDropDown;
     private Dropdown bloodTypeDropDown;
 
+    private Button back;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,10 +19,32 @@ public class ModifyDetailPanel : BasePanel
         sexDropDown = transform.Find("Sex/Dropdown").GetComponent<Dropdown>();
         starDropDown = transform.Find("Star/Dropdown").GetComponent<Dropdown>();
         bloodTypeDropDown = transform.Find("Blood/Dropdown").GetComponent<Dropdown>();
+        back = transform.Find("TopCloumn/back").GetComponent<Button>();
 
+        // 为Dropdown设置值
         UpdateDropDownItem(new List<string>() { "男","女"}, sexDropDown);
         UpdateDropDownItem(new List<string>(DataListHelper.StarList), starDropDown);
         UpdateDropDownItem(new List<string>(DataListHelper.BloodTypeList), bloodTypeDropDown);
+
+        back.onClick.AddListener(OnClickBack);
+    }
+
+    /// <summary>
+    /// panel退出时的事件
+    /// </summary>
+    public override void OnExit()
+    {
+        base.OnExit();
+        gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// panel进入时的事件
+    /// </summary>
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        gameObject.SetActive(true);
     }
 
     void Update()
@@ -45,5 +69,13 @@ public class ModifyDetailPanel : BasePanel
         }
         //初始选项的显示
         dropdown.captionText.text = showNames[0];
+    }
+
+    /// <summary>
+    /// 返回按钮点击
+    /// </summary>
+    private void OnClickBack()
+    {
+        uiMng.PopPanel();
     }
 }
