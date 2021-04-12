@@ -22,9 +22,9 @@ public class ModifyDetailPanel : BasePanel
         back = transform.Find("TopCloumn/back").GetComponent<Button>();
 
         // 为Dropdown设置值
-        UpdateDropDownItem(new List<string>() { "男","女"}, sexDropDown);
-        UpdateDropDownItem(new List<string>(DataListHelper.StarList), starDropDown);
-        UpdateDropDownItem(new List<string>(DataListHelper.BloodTypeList), bloodTypeDropDown);
+        UpdateDropDownItem(new List<string>() { "男","女"}, sexDropDown, Facade.GetUserData().Sex == "男" ? 0 : 1);
+        UpdateDropDownItem(new List<string>(DataListHelper.StarList), starDropDown, Facade.GetUserData().StarId - 1);
+        UpdateDropDownItem(new List<string>(DataListHelper.BloodTypeList), bloodTypeDropDown, Facade.GetUserData().BloodTypeId - 1);
 
         back.onClick.AddListener(OnClickBack);
     }
@@ -56,7 +56,7 @@ public class ModifyDetailPanel : BasePanel
     /// dropdown更新
     /// </summary>
     /// <param name="showNames"></param>
-    private void UpdateDropDownItem(List<string> showNames, Dropdown dropdown)
+    private void UpdateDropDownItem(List<string> showNames, Dropdown dropdown, int showIndex)
     {
         dropdown.options.Clear();
         Dropdown.OptionData temoData;
@@ -68,7 +68,7 @@ public class ModifyDetailPanel : BasePanel
             dropdown.options.Add(temoData);
         }
         //初始选项的显示
-        dropdown.captionText.text = showNames[0];
+        dropdown.captionText.text = showNames[showIndex];
     }
 
     /// <summary>

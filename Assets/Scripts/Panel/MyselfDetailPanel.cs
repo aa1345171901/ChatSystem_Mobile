@@ -46,8 +46,8 @@ public class MyselfDetailPanel : BasePanel
         idText.text = "账号 : " + userData.LoginId;
         sex.text = "性别 : " + userData.Sex;
         age.text = "年龄 : " + userData.Age;
-        star.text = "星座 : " + userData.StarId;
-        bloodType.text = "血型 : " + userData.BloodTypeId;
+        star.text = "星座 : " + DataListHelper.StarList[userData.StarId - 1];
+        bloodType.text = "血型 : " + DataListHelper.BloodTypeList[userData.BloodTypeId - 1];
         realName.text = "真实姓名 : " + userData.Name;
 
         // 给头像赋值
@@ -58,27 +58,30 @@ public class MyselfDetailPanel : BasePanel
         uiMng.PushPanel(UIPanelType.MainPanel);
     }
 
+    /// <summary>
+    /// panel创建时为uiMng赋值
+    /// </summary>
     public override void OnEnter()
     {
-        
+        uiMng.InjectMyselfDetailPanel(this);
     }
 
     /// <summary>
     /// 暂停时该script不能使用，以免移动该panel
     /// </summary>
-    public override void OnPause()
+    public void OnPauseMDP()
     {
         base.OnPause();
-        //screenSwipe.enabled = false;
+        screenSwipe.enabled = false;
     }
 
     /// <summary>
     /// 重启时启动该脚本
     /// </summary>
-    public override void OnResume()
+    public void OnResumeMDP()
     {
         base.OnResume();
-        //screenSwipe.enabled = true;
+        screenSwipe.enabled = true;
     }
 
     // Update is called once per frame

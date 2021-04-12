@@ -25,6 +25,7 @@ public class UIManager : BaseManager
     private Stack<BasePanel> panelStack;                  //用于存储显示的panel
 
     private MessagePanel msgPanel;     // 用于显示提示信息
+    private MyselfDetailPanel myselfDetail; // 用于展示个人信息
 
     private UIPanelType uIPanelType = UIPanelType.None;   // 用于异步展示panel的标识
     private bool isPop = false;                     // 用于异步出栈的标识
@@ -78,12 +79,16 @@ public class UIManager : BaseManager
         if (panelStack.Count > 0)
         {
             //获得栈顶元素而不出栈
-            BasePanel panel= panelStack.Peek();
+            BasePanel panel = panelStack.Peek();
             panel.OnPause();
         }
 
         BasePanel newPanel = GetPanel(panelType);
         newPanel.OnEnter();
+        if (myselfDetail != null && newPanel.name == "ModifyDetailPanel(Clone)")
+        {
+            myselfDetail.OnPauseMDP();
+        }
         panelStack.Push(newPanel);
     }
 
@@ -113,6 +118,10 @@ public class UIManager : BaseManager
             {
                 BasePanel panel2 = panelStack.Peek();
                 panel2.OnResume();
+                if (myselfDetail != null && panel1.name == "ModifyDetailPanel(Clone)")
+                {
+                    myselfDetail.OnResumeMDP();
+                }
             }
         }
     }
@@ -183,6 +192,15 @@ public class UIManager : BaseManager
     public void InjectMsgPanel(MessagePanel msgPanel)
     {
         this.msgPanel = msgPanel;
+    }
+
+    /// <summary>
+    /// MyselfDetailPanel获取
+    /// </summary>
+    /// <param name="msgPanel"></param>
+    public void InjectMyselfDetailPanel(MyselfDetailPanel myselfDetail)
+    {
+        this.myselfDetail = myselfDetail;
     }
 
     /// <summary>
