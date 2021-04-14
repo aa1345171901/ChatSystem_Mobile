@@ -13,7 +13,7 @@ public class ModifyDetailPanel : BasePanel
     private Button back;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         // 获取组件
         sexDropDown = transform.Find("Sex/Dropdown").GetComponent<Dropdown>();
@@ -21,12 +21,15 @@ public class ModifyDetailPanel : BasePanel
         bloodTypeDropDown = transform.Find("Blood/Dropdown").GetComponent<Dropdown>();
         back = transform.Find("TopCloumn/back").GetComponent<Button>();
 
+        back.onClick.AddListener(OnClickBack);
+    }
+
+    private void Start()
+    {
         // 为Dropdown设置值
-        UpdateDropDownItem(new List<string>() { "男","女"}, sexDropDown, Facade.GetUserData().Sex == "男" ? 0 : 1);
+        UpdateDropDownItem(new List<string>() { "男", "女" }, sexDropDown, Facade.GetUserData().Sex == "男" ? 0 : 1);
         UpdateDropDownItem(new List<string>(DataListHelper.StarList), starDropDown, Facade.GetUserData().StarId - 1);
         UpdateDropDownItem(new List<string>(DataListHelper.BloodTypeList), bloodTypeDropDown, Facade.GetUserData().BloodTypeId - 1);
-
-        back.onClick.AddListener(OnClickBack);
     }
 
     /// <summary>
@@ -44,6 +47,10 @@ public class ModifyDetailPanel : BasePanel
     public override void OnEnter()
     {
         base.OnEnter();
+        // 为Dropdown设置值
+        UpdateDropDownItem(new List<string>() { "男", "女" }, sexDropDown, Facade.GetUserData().Sex == "男" ? 0 : 1);
+        UpdateDropDownItem(new List<string>(DataListHelper.StarList), starDropDown, Facade.GetUserData().StarId - 1);
+        UpdateDropDownItem(new List<string>(DataListHelper.BloodTypeList), bloodTypeDropDown, Facade.GetUserData().BloodTypeId - 1);
         gameObject.SetActive(true);
     }
 
@@ -69,6 +76,7 @@ public class ModifyDetailPanel : BasePanel
         }
         //初始选项的显示
         dropdown.captionText.text = showNames[showIndex];
+        dropdown.value = showIndex;
     }
 
     /// <summary>
