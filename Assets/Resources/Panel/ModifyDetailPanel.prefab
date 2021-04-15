@@ -992,6 +992,7 @@ GameObject:
   - component: {fileID: 6390961337094179368}
   - component: {fileID: 1910793827791843990}
   - component: {fileID: 706767479702776408}
+  - component: {fileID: 6980393433159342482}
   m_Layer: 5
   m_Name: ModifyDetailPanel
   m_TagString: Untagged
@@ -1074,6 +1075,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b258fb74c3acf1f43ad01b7a513222e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6980393433159342482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455216736157448674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 348ae55ff8e8ffe498d76a7daa7020d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1471769055549056202

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +22,10 @@ public class ModifyDetailPanel : BasePanel
     private string nickName = "";
     private int age;
 
+    private ModifyRequest modifyRequest;
+
+    private bool isModify = false;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -33,6 +39,8 @@ public class ModifyDetailPanel : BasePanel
 
         back = transform.Find("TopCloumn/back").GetComponent<Button>();
         saveBtn = transform.Find("Button").GetComponent<Button>();
+
+        modifyRequest = GetComponent<ModifyRequest>();
 
         // 添加事件
         back.onClick.AddListener(OnClickBack);
@@ -71,7 +79,22 @@ public class ModifyDetailPanel : BasePanel
 
     void Update()
     {
+        if (isModify)
+        {
+            if (nickNameIF.text != "")
+            {
+                Facade.GetUserData().NickName = nickNameIF.text;
+            }
+            Facade.GetUserData().Sex = sexDropDown.captionText.text;
 
+            if (ageIF.text != "")
+            {
+                Facade.GetUserData().Age = int.Parse(ageIF.text);
+            }
+            Facade.GetUserData().StarId = starDropDown.value + 1;
+            Facade.GetUserData().BloodTypeId = bloodTypeDropDown.value + 1;
+            isModify = false;
+        }
     }
 
     /// <summary>
@@ -107,17 +130,41 @@ public class ModifyDetailPanel : BasePanel
     /// </summary>
     private void OnClickSave()
     {
+        int dataId = Facade.GetUserData().DataId;
+        string nickName = Facade.GetUserData().NickName;
         if (nickNameIF.text != "")
         {
-            Facade.GetUserData().NickName = nickNameIF.text;
+            nickName = nickNameIF.text;
         }
-        Facade.GetUserData().Sex = sexDropDown.captionText.text;
-
+        string sex = sexDropDown.captionText.text; ;
+        int age = Facade.GetUserData().Age;
         if (ageIF.text != "")
         {
-            Facade.GetUserData().Age = int.Parse(ageIF.text);
+            age = int.Parse(ageIF.text);
         }
-        Facade.GetUserData().StarId = starDropDown.value + 1;
-        Facade.GetUserData().BloodTypeId = bloodTypeDropDown.value + 1;
+        string name = "";
+        int starid = starDropDown.value + 1; ;
+        int bloodtypeid = bloodTypeDropDown.value + 1; ;
+        string data = dataId + "," + nickName + "," + sex + "," + age + "," + name + "," + starid + "," + bloodtypeid;
+        modifyRequest.SendRequest(data);
+    }
+
+
+    /// <summary>
+    /// 修改信息反馈
+    /// </summary>
+    public void OnResponseModifyDetail(ReturnCode returnCode)
+    {
+        if (returnCode == ReturnCode.Success)
+        {
+            isModify = true;
+            Thread.Sleep(100);
+            uiMng.ShowMessageSync("修改成功");
+        }
+        else
+        {
+            uiMng.ShowMessageSync("无法获取好友列表,,ԾㅂԾ,,");
+        }
+        uiMng.PopPanelSync();
     }
 }
