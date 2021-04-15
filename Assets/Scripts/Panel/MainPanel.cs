@@ -158,7 +158,11 @@ public class MainPanel : BasePanel
         if (offset > 0)
         {
             offset = offset > 300 ? 300 : offset;
-            this.transform.localPosition = new Vector3(offset, 0, 0);
+            // 当panel在中间才能向右滑
+            if (this.transform.localPosition.x < 300)
+            {
+                this.transform.localPosition = new Vector3(offset, 0, 0);
+            }
         }
         else
         {

@@ -10,7 +10,15 @@ public class ModifyDetailPanel : BasePanel
     private Dropdown starDropDown;
     private Dropdown bloodTypeDropDown;
 
+    private InputField nickNameIF;
+    private InputField ageIF;
+
     private Button back;
+
+    private Button saveBtn;
+
+    private string nickName = "";
+    private int age;
 
     // Start is called before the first frame update
     void Awake()
@@ -19,9 +27,16 @@ public class ModifyDetailPanel : BasePanel
         sexDropDown = transform.Find("Sex/Dropdown").GetComponent<Dropdown>();
         starDropDown = transform.Find("Star/Dropdown").GetComponent<Dropdown>();
         bloodTypeDropDown = transform.Find("Blood/Dropdown").GetComponent<Dropdown>();
-        back = transform.Find("TopCloumn/back").GetComponent<Button>();
 
+        nickNameIF = transform.Find("NickName/InputField").GetComponent<InputField>();
+        ageIF = transform.Find("Age/InputField").GetComponent<InputField>();
+
+        back = transform.Find("TopCloumn/back").GetComponent<Button>();
+        saveBtn = transform.Find("Button").GetComponent<Button>();
+
+        // 添加事件
         back.onClick.AddListener(OnClickBack);
+        saveBtn.onClick.AddListener(OnClickSave);
     }
 
     private void Start()
@@ -85,5 +100,24 @@ public class ModifyDetailPanel : BasePanel
     private void OnClickBack()
     {
         uiMng.PopPanel();
+    }
+
+    /// <summary>
+    /// 保存按钮点击
+    /// </summary>
+    private void OnClickSave()
+    {
+        if (nickNameIF.text != "")
+        {
+            Facade.GetUserData().NickName = nickNameIF.text;
+        }
+        Facade.GetUserData().Sex = sexDropDown.captionText.text;
+
+        if (ageIF.text != "")
+        {
+            Facade.GetUserData().Age = int.Parse(ageIF.text);
+        }
+        Facade.GetUserData().StarId = starDropDown.value + 1;
+        Facade.GetUserData().BloodTypeId = bloodTypeDropDown.value + 1;
     }
 }

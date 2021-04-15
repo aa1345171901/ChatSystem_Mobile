@@ -40,6 +40,13 @@ public class MyselfDetailPanel : BasePanel
         // 添加事件
         modifyDeatilBtn.onClick.AddListener(OnClickModifyBtn);
 
+        setDetail();
+
+        uiMng.PushPanel(UIPanelType.MainPanel);
+    }
+
+    public void setDetail()
+    {
         // 为组件设置值
         UserData userData = Facade.GetUserData();
         nickName.text = userData.NickName;
@@ -54,8 +61,6 @@ public class MyselfDetailPanel : BasePanel
         string facePath = "FaceImage/" + Facade.GetUserData().FaceId;
         Sprite faceImg = Resources.Load<Sprite>(facePath);
         faceImage.sprite = faceImg;
-
-        uiMng.PushPanel(UIPanelType.MainPanel);
     }
 
     /// <summary>
@@ -82,6 +87,8 @@ public class MyselfDetailPanel : BasePanel
     {
         base.OnResume();
         screenSwipe.enabled = true;
+
+        setDetail();
     }
 
     // Update is called once per frame
@@ -108,7 +115,11 @@ public class MyselfDetailPanel : BasePanel
         if (offset > 0)
         {
             offset = offset > 300 ? 300 : offset;
-            this.transform.localPosition = new Vector3(-300 + offset, 0, 0);
+            // 当panel在左边才能向右滑
+            if (this.transform.localPosition.x < -0)
+            {
+                this.transform.localPosition = new Vector3(-300 + offset, 0, 0);
+            }
         }
         else
         {
