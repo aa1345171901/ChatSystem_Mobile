@@ -70,6 +70,11 @@ public class MainPanel : BasePanel
     public override void OnResume()
     {
         gameObject.SetActive(true);
+
+        // 给头像赋值
+        string facePath = "FaceImage/" + Facade.GetUserData().FaceId;
+        Sprite faceImg = Resources.Load<Sprite>(facePath);
+        face.sprite = faceImg;
     }
 
     /// <summary>

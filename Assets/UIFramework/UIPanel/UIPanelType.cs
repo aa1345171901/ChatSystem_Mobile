@@ -16,4 +16,5 @@ public enum UIPanelType
         FriendDetailPanel,
         ModifyDetailPanel,
         MyselfDetailPanel,
+        FacePanel
 }

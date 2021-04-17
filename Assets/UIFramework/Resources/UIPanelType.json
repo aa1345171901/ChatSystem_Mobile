@@ -51,6 +51,11 @@
     },
 
     {
+      "panelTypeString": "FacePanel",
+      "path": "Panel/FacePanel"
+    },
+
+    {
       "panelTypeString": "MessagePanel",
       "path": "Panel/MessagePanel"
     }

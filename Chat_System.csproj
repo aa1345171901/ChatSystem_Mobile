@@ -650,6 +650,7 @@
     <Compile Include="Assets\Demigiant\DOTweenPro\DOTweenAnimation.cs" />
     <Compile Include="Assets\Scripts\Facade.cs" />
     <Compile Include="Assets\Scripts\Helper\DataHelper.cs" />
+    <Compile Include="Assets\Scripts\Helper\DataListHelper.cs" />
     <Compile Include="Assets\Scripts\Helper\ScreenSwipe.cs" />
     <Compile Include="Assets\Scripts\ItemOther\AddFriendItem.cs" />
     <Compile Include="Assets\Scripts\ItemOther\ChatBtnClick.cs" />
@@ -678,6 +679,7 @@
     <Compile Include="Assets\Scripts\Request\BaseRequest.cs" />
     <Compile Include="Assets\Scripts\Request\GetFriendListRequest.cs" />
     <Compile Include="Assets\Scripts\Request\LoginRequest.cs" />
+    <Compile Include="Assets\Scripts\Request\ModifyRequest.cs" />
     <Compile Include="Assets\Scripts\Request\RegisterRequest.cs" />
     <Compile Include="Assets\Scripts\Request\SearchFriendRequest.cs" />
     <Compile Include="Assets\UIFramework\Base\BasePanel.cs" />
@@ -687,6 +689,8 @@
     <Compile Include="Assets\UIFramework\UIPanel\UIPanelType.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Data\bloodtype.txt" />
+    <None Include="Assets\Data\star.txt" />
     <None Include="Assets\Demigiant\DOTween\DOTween.XML" />
     <None Include="Assets\Demigiant\DOTween\DOTween43.xml" />
     <None Include="Assets\Demigiant\DOTween\DOTween46.xml" />

@@ -54,6 +54,7 @@ public class ScreenSwipe : MonoBehaviour
         {
             fingerCurrentX = Input.mousePosition.x;
             fingerCurrentY = Input.mousePosition.y;
+
             fingerSegmentX = fingerCurrentX - fingerBeginX;
             fingerSegmentY = fingerCurrentY - fingerBeginY;
 

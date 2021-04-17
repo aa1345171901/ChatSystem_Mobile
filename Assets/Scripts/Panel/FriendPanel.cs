@@ -132,7 +132,11 @@ public class FriendPanel : BasePanel
     /// </summary>
     public override void OnResume()
     {
-        // gameObject.SetActive(true);
+        gameObject.SetActive(true);
+        // 给头像赋值
+        string facePath = "FaceImage/" + Facade.GetUserData().FaceId;
+        Sprite faceImg = Resources.Load<Sprite>(facePath);
+        face.sprite = faceImg;
     }
 
     /// <summary>
@@ -149,7 +153,7 @@ public class FriendPanel : BasePanel
     /// </summary>
     public override void OnPause()
     {
-        // gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     /// <summary>

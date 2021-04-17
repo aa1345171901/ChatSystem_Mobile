@@ -14,13 +14,12 @@ public class ModifyDetailPanel : BasePanel
 
     private InputField nickNameIF;
     private InputField ageIF;
+    private InputField realNameIF;
 
     private Button back;
 
     private Button saveBtn;
-
-    private string nickName = "";
-    private int age;
+    private Button faceBtn;
 
     private ModifyRequest modifyRequest;
 
@@ -36,15 +35,18 @@ public class ModifyDetailPanel : BasePanel
 
         nickNameIF = transform.Find("NickName/InputField").GetComponent<InputField>();
         ageIF = transform.Find("Age/InputField").GetComponent<InputField>();
+        realNameIF = transform.Find("RealName/InputField").GetComponent<InputField>();
 
         back = transform.Find("TopCloumn/back").GetComponent<Button>();
         saveBtn = transform.Find("Button").GetComponent<Button>();
+        faceBtn = transform.Find("Face").GetComponent<Button>();
 
         modifyRequest = GetComponent<ModifyRequest>();
 
         // 添加事件
         back.onClick.AddListener(OnClickBack);
         saveBtn.onClick.AddListener(OnClickSave);
+        faceBtn.onClick.AddListener(OnClickFace);
     }
 
     private void Start()
@@ -90,6 +92,11 @@ public class ModifyDetailPanel : BasePanel
             if (ageIF.text != "")
             {
                 Facade.GetUserData().Age = int.Parse(ageIF.text);
+            }
+
+            if (realNameIF.text != "")
+            {
+                Facade.GetUserData().Name = realNameIF.text;
             }
             Facade.GetUserData().StarId = starDropDown.value + 1;
             Facade.GetUserData().BloodTypeId = bloodTypeDropDown.value + 1;
@@ -143,10 +150,19 @@ public class ModifyDetailPanel : BasePanel
             age = int.Parse(ageIF.text);
         }
         string name = "";
+        if (realNameIF.text != "")
+        {
+            name = realNameIF.text;
+        }
         int starid = starDropDown.value + 1; ;
         int bloodtypeid = bloodTypeDropDown.value + 1; ;
         string data = dataId + "," + nickName + "," + sex + "," + age + "," + name + "," + starid + "," + bloodtypeid;
         modifyRequest.SendRequest(data);
+    }
+
+    private void OnClickFace()
+    {
+        uiMng.PushPanel(UIPanelType.FacePanel);
     }
 
 
