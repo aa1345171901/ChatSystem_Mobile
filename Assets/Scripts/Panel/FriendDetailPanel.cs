@@ -1,6 +1,7 @@
 ﻿using Common;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +21,8 @@ public class FriendDetailPanel : BasePanel
     private Text bloodType;
     private Text realName;
     private Image faceImage;
+
+    public bool isGet = false;   // 判断好友资料是否获得
 
     // Start is called before the first frame update
     void Awake()
@@ -62,7 +65,7 @@ public class FriendDetailPanel : BasePanel
         realName.text = "真实姓名 : " + userData.Name;
 
         // 给头像赋值
-        string facePath = "FaceImage/" + Facade.GetUserData().FaceId;
+        string facePath = "FaceImage/" + userData.FaceId;
         Sprite faceImg = Resources.Load<Sprite>(facePath);
         faceImage.sprite = faceImg;
     }
@@ -76,10 +79,10 @@ public class FriendDetailPanel : BasePanel
     // Update is called once per frame
     void Update()
     {
-        if (Facade.IsGet)
+        if (isGet)
         {
             SetDetail();
-            Facade.IsGet = false;
+            isGet = false;
         }
     }
 
@@ -99,7 +102,7 @@ public class FriendDetailPanel : BasePanel
         }
         else
         {
-           
+            
         }
     }
 

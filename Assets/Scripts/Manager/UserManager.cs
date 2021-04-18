@@ -30,7 +30,7 @@ public class UserManager : BaseManager
         }
         set
         {
-            userdata = value;
+            friendUserdata = value;
         }
     }
 

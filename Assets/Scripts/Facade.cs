@@ -15,19 +15,6 @@ public class Facade : MonoBehaviour
     private RequestManager requestManager;
     private UserManager userManager;
 
-    private bool isGet = false;   // 判断好友资料是否获得
-    public bool IsGet
-    {
-        get
-        {
-            return IsGet;
-        }
-        set
-        {
-            isGet = value;
-        }
-    }
-
     /// <summary>
     /// 单例模式，全局只有一个Facade控制
     /// </summary>

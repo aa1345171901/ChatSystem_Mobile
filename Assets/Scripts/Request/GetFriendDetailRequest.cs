@@ -1,6 +1,7 @@
 ﻿using Common;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class GetFriendDetailRequest : BaseRequest
@@ -34,7 +35,7 @@ public class GetFriendDetailRequest : BaseRequest
             userData.BloodTypeId = int.Parse(strs[8]);
             userData.FaceId = int.Parse(strs[9]);
             Facade.SetFriendUserData(userData);
-            Facade.IsGet = true;
+            friendDetailPanel.isGet = true;
         }
     }
 }
