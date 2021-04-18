@@ -15,6 +15,19 @@ public class Facade : MonoBehaviour
     private RequestManager requestManager;
     private UserManager userManager;
 
+    private bool isGet = false;   // 判断好友资料是否获得
+    public bool IsGet
+    {
+        get
+        {
+            return IsGet;
+        }
+        set
+        {
+            isGet = value;
+        }
+    }
+
     /// <summary>
     /// 单例模式，全局只有一个Facade控制
     /// </summary>
@@ -130,6 +143,24 @@ public class Facade : MonoBehaviour
     public UserData GetUserData()
     {
         return userManager.UserData;
+    }
+
+    /// <summary>
+    /// 用于设置好友消息
+    /// </summary>
+    /// <param name="userData"></param>
+    public void SetFriendUserData(UserData friendUserData)
+    {
+        userManager.FriendUserdata = friendUserData;
+    }
+
+    /// <summary>
+    /// 用于获取好友消息
+    /// </summary>
+    /// <returns></returns>
+    public UserData GetFriendUserData()
+    {
+        return userManager.FriendUserdata;
     }
 
     /// <summary>

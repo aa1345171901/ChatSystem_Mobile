@@ -19,8 +19,24 @@ public class UserManager : BaseManager
         }
     }
 
+    // 用于保存打开好友数据
+    private UserData friendUserdata;
+
+    public UserData FriendUserdata
+    {
+        get
+        {
+            return friendUserdata;
+        }
+        set
+        {
+            userdata = value;
+        }
+    }
+
     public UserManager(Facade facade) : base(facade)
     {
         userdata = new UserData();
+        friendUserdata = new UserData();
     }
 }

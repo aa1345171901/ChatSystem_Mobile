@@ -693,7 +693,7 @@ GameObject:
   - component: {fileID: 6574796909272347072}
   - component: {fileID: 6574796909272347079}
   m_Layer: 5
-  m_Name: Blood (1)
+  m_Name: RealName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -772,6 +772,7 @@ GameObject:
   - component: {fileID: 6574796909390642523}
   - component: {fileID: 6574796909390642522}
   - component: {fileID: 3106623614084011180}
+  - component: {fileID: 1068841997332852330}
   m_Layer: 5
   m_Name: FriendDetailPanel
   m_TagString: Untagged
@@ -855,6 +856,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   btnText: {fileID: 0}
+  idText: {fileID: 0}
+--- !u!114 &1068841997332852330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6574796909390642520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d03252b61a8d0604cafbebbcd7e99364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6574796909692549508
 GameObject:
   m_ObjectHideFlags: 0

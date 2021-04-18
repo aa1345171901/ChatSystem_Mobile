@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -234,7 +235,19 @@ public class AddFriendPanel : BasePanel
     public void OnFriendItemClick()
     {
         FriendDetailPanel friendDetailPanel = uiMng.PushPanel(UIPanelType.FriendDetailPanel) as FriendDetailPanel;
+        GetFriendDetailRequest getDetail = friendDetailPanel.GetComponent<GetFriendDetailRequest>();
+
+        //通过 UnityEngine.EventSystems的底层来获取到当前点击的对象
+        var button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+        string str = button.transform.Find("NickName").GetComponent<Text>().text;
+        Match m = Regex.Match(str, "\\[( .*? )\\]");
+        int friendId = int.Parse(m.Groups[1].Value);
+
+        friendDetailPanel.idText.text = "账号 :" + friendId.ToString();
         friendDetailPanel.btnText.text = "加好友";
+
+        // 获取详细信息请求
+        getDetail.SendRequest(friendId.ToString());
     }
 
     /// <summary>

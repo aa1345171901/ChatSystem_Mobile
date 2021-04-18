@@ -3,6 +3,8 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -284,6 +286,7 @@ public class FriendPanel : BasePanel
 
             // 设置子物体属性
             go.GetComponentInChildren<Text>().text = nickName;
+            go.name = item.Key.ToString();
 
             string facePath = "FaceImage/" + faceId;
             Sprite face = Resources.Load<Sprite>(facePath);
@@ -312,6 +315,17 @@ public class FriendPanel : BasePanel
         FriendDetailPanel friendDetailPanel = uiMng.PushPanel(UIPanelType.FriendDetailPanel) as FriendDetailPanel;
         screenSwipe.OnInit();
         friendDetailPanel.btnText.text = "发消息";
+
+        GetFriendDetailRequest getDetail = friendDetailPanel.GetComponent<GetFriendDetailRequest>();
+
+        //通过 UnityEngine.EventSystems的底层来获取到当前点击的对象
+        var button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+        int friendId = int.Parse(button.name);
+
+        friendDetailPanel.idText.text = "账号 :" + friendId.ToString();
+
+        // 获取详细信息请求
+        getDetail.SendRequest(friendId.ToString());
     }
 
     /// <summary>
