@@ -75,6 +75,18 @@ public class AddFriendPanel : BasePanel
         HideAnimation();
     }
 
+    public override void OnPause()
+    {
+        base.OnPause();
+        transform.localPosition = new Vector3(300, 0, 0);
+    }
+
+    public override void OnResume()
+    {
+        base.OnResume();
+        transform.localPosition = new Vector3(0, 0, 0);
+    }
+
     /// <summary>
     /// Panel进入动画
     /// </summary>
@@ -214,6 +226,15 @@ public class AddFriendPanel : BasePanel
                 friendGOs[i].SetActive(false);
             }
         }
+    }
+
+    /// <summary>
+    /// 子物体点击
+    /// </summary>
+    public void OnFriendItemClick()
+    {
+        FriendDetailPanel friendDetailPanel = uiMng.PushPanel(UIPanelType.FriendDetailPanel) as FriendDetailPanel;
+        friendDetailPanel.btnText.text = "加好友";
     }
 
     /// <summary>

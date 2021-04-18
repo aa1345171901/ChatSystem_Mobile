@@ -16,6 +16,8 @@ public class MainPanel : BasePanel
     private Text nickName;
     private Image face;
 
+    private ScreenSwipe screenSwipe;
+
     private void Awake()
     {
         // 获取游戏物体
@@ -32,6 +34,8 @@ public class MainPanel : BasePanel
 
         nickName = transform.Find("TopColumn/NickName").GetComponent<Text>();
         face = transform.Find("TopColumn/face").GetComponent<Image>();
+
+        screenSwipe = GetComponent<ScreenSwipe>();
     }
 
     private void Start()
@@ -70,6 +74,7 @@ public class MainPanel : BasePanel
     public override void OnResume()
     {
         gameObject.SetActive(true);
+        screenSwipe.enabled = true;
 
         // 给头像赋值
         string facePath = "FaceImage/" + Facade.GetUserData().FaceId;
@@ -91,7 +96,8 @@ public class MainPanel : BasePanel
     /// </summary>
     public override void OnPause()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        screenSwipe.enabled = false;
     }
 
     /// <summary>

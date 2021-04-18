@@ -73,6 +73,14 @@ public class ScreenSwipe : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 将状态设为未点击
+    /// </summary>
+    public void OnInit()
+    {
+        fingerTouchState = FINGER_STATE_NULL;
+    }
+
     private void toAddFingerAction()
     {
 

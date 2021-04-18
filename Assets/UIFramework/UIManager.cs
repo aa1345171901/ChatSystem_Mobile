@@ -68,7 +68,7 @@ public class UIManager : BaseManager
     /// 将实例化的panel存储入栈并显示
     /// </summary>
     /// <param name="panelType"></param>
-    public void PushPanel(UIPanelType panelType)
+    public BasePanel PushPanel(UIPanelType panelType)
     {
         if (panelStack == null)
         {
@@ -90,6 +90,7 @@ public class UIManager : BaseManager
             myselfDetail.OnPauseMDP();
         }
         panelStack.Push(newPanel);
+        return newPanel;
     }
 
     /// <summary>
@@ -124,6 +125,15 @@ public class UIManager : BaseManager
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// 获取顶部panel，用于设置信息
+    /// </summary>
+    /// <returns></returns>
+    public BasePanel GetPanelPeek()
+    {
+        return panelStack.Peek();
     }
 
     /// <summary>

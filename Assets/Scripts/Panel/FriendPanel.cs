@@ -27,6 +27,8 @@ public class FriendPanel : BasePanel
     private Button addFriendImg;   // 右上角的好友添加按钮
     private Button addFriendText;   // 列表的新朋友按钮
 
+    private ScreenSwipe screenSwipe;   // 控制滑动panel失效
+
     private void Awake()
     {
         // 获取游戏物体
@@ -41,6 +43,8 @@ public class FriendPanel : BasePanel
         face = transform.Find("TopColumn/face").GetComponent<Image>();
 
         addFriendImg = transform.Find("TopColumn/AddFriendBtn").GetComponent<Button>();
+
+        screenSwipe = GetComponent<ScreenSwipe>();
 
         // 给物体添加事件
         messageImg.GetComponent<Button>().onClick.AddListener(OnClickMainBtn);
@@ -133,6 +137,7 @@ public class FriendPanel : BasePanel
     public override void OnResume()
     {
         gameObject.SetActive(true);
+        screenSwipe.enabled = true;
         // 给头像赋值
         string facePath = "FaceImage/" + Facade.GetUserData().FaceId;
         Sprite faceImg = Resources.Load<Sprite>(facePath);
@@ -153,7 +158,8 @@ public class FriendPanel : BasePanel
     /// </summary>
     public override void OnPause()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        screenSwipe.enabled = false;
     }
 
     /// <summary>
@@ -283,6 +289,8 @@ public class FriendPanel : BasePanel
             Sprite face = Resources.Load<Sprite>(facePath);
             go.transform.Find("FaceMask/Image").GetComponent<Image>().sprite = face;
 
+            go.GetComponent<Button>().onClick.AddListener(OnFriendItemClick);
+
             // 设置父物体
             go.transform.SetParent(content, false);
         }
@@ -297,11 +305,22 @@ public class FriendPanel : BasePanel
     }
 
     /// <summary>
-    /// 添加好友按钮点击
+    /// 好友列表子物体点击
+    /// </summary>
+    private void OnFriendItemClick()
+    {
+        FriendDetailPanel friendDetailPanel = uiMng.PushPanel(UIPanelType.FriendDetailPanel) as FriendDetailPanel;
+        screenSwipe.OnInit();
+        friendDetailPanel.btnText.text = "发消息";
+    }
+
+    /// <summary>
+    /// 右上角添加好友按钮点击
     /// </summary>
     private void AddFriendClick()
     {
         uiMng.PushPanel(UIPanelType.AddFriendPanel);
+        screenSwipe.OnInit();
     }
 
     /// <summary>
