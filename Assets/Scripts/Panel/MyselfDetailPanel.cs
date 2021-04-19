@@ -140,7 +140,11 @@ public class MyselfDetailPanel : BasePanel
     {
         if (isMove)
         {
-            this.transform.DOLocalMoveX(0, 0.2f);
+            // 当panel在左边才能向右滑
+            if (this.transform.localPosition.x < 0)
+            {
+                this.transform.DOLocalMoveX(0, 0.2f);
+            }
         }
         else
         {

@@ -372,8 +372,11 @@ public class FriendPanel : BasePanel
     {
         if (isMove)
         {
-            Tween t = this.transform.DOLocalMoveX(300, 0.2f);
-            // t.OnComplete(() => gameObject.SetActive(false));
+            // 当panel在右边才能向左滑
+            if (this.transform.localPosition.x > 0)
+            {
+                Tween t = this.transform.DOLocalMoveX(300, 0.2f);
+            }
         }
         else
         {

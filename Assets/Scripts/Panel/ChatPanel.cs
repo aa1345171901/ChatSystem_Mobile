@@ -7,12 +7,17 @@ using UnityEngine.UI;
 public class ChatPanel : BasePanel
 {
     private Button backBtn;
+    private Text nickName;
+
+    private int friendId;
+    private int faceId;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         // 获取组件
         backBtn = this.transform.Find("ChatTopColumn/back").GetComponent<Button>();
+        nickName = this.transform.Find("ChatTopColumn/nickName").GetComponent<Text>();
 
         // 设置事件
         backBtn.onClick.AddListener(BackBtnClick);
@@ -65,5 +70,15 @@ public class ChatPanel : BasePanel
     {
         Tween tween = transform.DOLocalMoveX(300, 0.4f);
         tween.OnComplete(() => gameObject.SetActive(false));
+    }
+
+    /// <summary>
+    /// 设置需要聊天的好友的三个信息
+    /// </summary>
+    public void SetDetail(int friendId, string nickName, int faceId)
+    {
+        this.friendId = friendId;
+        this.nickName.text = nickName;
+        this.faceId = faceId;
     }
 }

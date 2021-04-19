@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -57,9 +58,11 @@ public class ScreenSwipe : MonoBehaviour
 
             fingerSegmentX = fingerCurrentX - fingerBeginX;
             fingerSegmentY = fingerCurrentY - fingerBeginY;
-
-            // 右滑过程中，发送消息给其他panel进行滑动
-            SendMessage("OnFingerMove", fingerSegmentX);
+            if(Math.Abs(fingerSegmentX) > Math.Abs(fingerSegmentY))
+            {
+                // 右滑过程中，发送消息给其他panel进行滑动
+                SendMessage("OnFingerMove", fingerSegmentX);
+            }
         }
 
         // 松开手指或鼠标
@@ -103,6 +106,6 @@ public class ScreenSwipe : MonoBehaviour
         {
             SendMessage("OnFingerAction", true);
         }
-
+        Debug.Log(fingerSegmentX);
     }
 }
