@@ -666,6 +666,7 @@
     <Compile Include="Assets\Scripts\Model\UserData.cs" />
     <Compile Include="Assets\Scripts\Panel\AddFriendPanel.cs" />
     <Compile Include="Assets\Scripts\Panel\ChatPanel.cs" />
+    <Compile Include="Assets\Scripts\Panel\FacePanel.cs" />
     <Compile Include="Assets\Scripts\Panel\FriendDetailPanel.cs" />
     <Compile Include="Assets\Scripts\Panel\FriendPanel.cs" />
     <Compile Include="Assets\Scripts\Panel\FriendQPanel.cs" />
@@ -677,11 +678,13 @@
     <Compile Include="Assets\Scripts\Panel\RegisterPanel.cs" />
     <Compile Include="Assets\Scripts\Request\AddFriendRequest.cs" />
     <Compile Include="Assets\Scripts\Request\BaseRequest.cs" />
+    <Compile Include="Assets\Scripts\Request\GetFriendDetailRequest.cs" />
     <Compile Include="Assets\Scripts\Request\GetFriendListRequest.cs" />
     <Compile Include="Assets\Scripts\Request\LoginRequest.cs" />
     <Compile Include="Assets\Scripts\Request\ModifyRequest.cs" />
     <Compile Include="Assets\Scripts\Request\RegisterRequest.cs" />
     <Compile Include="Assets\Scripts\Request\SearchFriendRequest.cs" />
+    <Compile Include="Assets\Scripts\Request\SetSystemFaceRequest.cs" />
     <Compile Include="Assets\UIFramework\Base\BasePanel.cs" />
     <Compile Include="Assets\UIFramework\Extension\DictionaryExtension.cs" />
     <Compile Include="Assets\UIFramework\UIManager.cs" />
