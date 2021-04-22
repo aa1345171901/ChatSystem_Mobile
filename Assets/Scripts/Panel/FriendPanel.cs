@@ -74,7 +74,7 @@ public class FriendPanel : BasePanel
         
         // 给按钮添加事件
         addFriendText = goNewFriend.GetComponent<Button>();
-        addFriendText.onClick.AddListener(AddFriendClick);
+        addFriendText.onClick.AddListener(SystemFriend);
 
         // 设置layout空隙
         space = Instantiate(Resources.Load<GameObject>("Item/Spacing"));
@@ -334,6 +334,15 @@ public class FriendPanel : BasePanel
     private void AddFriendClick()
     {
         uiMng.PushPanel(UIPanelType.AddFriendPanel);
+        screenSwipe.OnInit();
+    }
+
+    /// <summary>
+    /// 点击新朋友
+    /// </summary>
+    private void SystemFriend()
+    {
+        uiMng.PushPanel(UIPanelType.SystemPanel);
         screenSwipe.OnInit();
     }
 

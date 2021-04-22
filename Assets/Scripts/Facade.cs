@@ -14,6 +14,9 @@ public class Facade : MonoBehaviour
     private UIManager uiManager;
     private RequestManager requestManager;
     private UserManager userManager;
+    private MessageManager msgManager;
+
+    private GetUnreadMessageRequest getUnreadMsg;
 
     /// <summary>
     /// 单例模式，全局只有一个Facade控制
@@ -41,6 +44,7 @@ public class Facade : MonoBehaviour
 
     private void Start()
     {
+        getUnreadMsg = GetComponent<GetUnreadMessageRequest>();
         OnInit();
     }
 
@@ -53,6 +57,7 @@ public class Facade : MonoBehaviour
         uiManager.Update();
         requestManager.Update();
         userManager.Update();
+        msgManager.Update();
     }
 
     /// <summary>
@@ -64,11 +69,13 @@ public class Facade : MonoBehaviour
         uiManager = new UIManager(this);
         requestManager = new RequestManager(this);
         userManager = new UserManager(this);
+        msgManager = new MessageManager(this, getUnreadMsg);
 
         clientManager.OnInit();
         uiManager.OnInit();
         requestManager.OnInit();
         userManager.OnInit();
+        msgManager.OnInit();
     }
 
     /// <summary>
@@ -80,6 +87,7 @@ public class Facade : MonoBehaviour
         uiManager.OnDestroy();
         requestManager.OnDestroy();
         userManager.OnDestroy();
+        msgManager.OnDestroy();
     }
 
     /// <summary>
@@ -164,5 +172,23 @@ public class Facade : MonoBehaviour
     public void PopPanel()
     {
         uiManager.PopPanel();
+    }
+
+    /// <summary>
+    /// 设置未读信息
+    /// </summary>
+    /// <returns></returns>
+    public void SetUnreadMsg(Dictionary<int, string> dict)
+    {
+        msgManager.GetUnreadMessage = dict;
+    }
+
+    /// <summary>
+    /// 获取未读信息
+    /// </summary>
+    /// <returns></returns>
+    public Dictionary<int, string> GetUnreadMsg()
+    {
+        return msgManager.GetUnreadMessage;
     }
 }
