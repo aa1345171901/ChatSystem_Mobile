@@ -58,9 +58,9 @@ public class FriendDetailPanel : BasePanel
         nickName.text = userData.NickName;
         sex.text = "性别 : " + userData.Sex;
         age.text = "年龄 : " + userData.Age;
-        string starStr = userData.StarId - 1 > 0 ? DataListHelper.StarList[userData.StarId - 1] : "";
+        string starStr = userData.StarId - 1 >= 0 ? DataListHelper.StarList[userData.StarId - 1] : "";
         star.text = "星座 : " + starStr;
-        string bloodStr = userData.BloodTypeId - 1 > 0 ? DataListHelper.BloodTypeList[userData.BloodTypeId - 1] : "";
+        string bloodStr = userData.BloodTypeId - 1 >= 0 ? DataListHelper.BloodTypeList[userData.BloodTypeId - 1] : "";
         bloodType.text = "血型 : " + bloodStr;
         realName.text = "真实姓名 : " + userData.Name;
 
@@ -121,6 +121,22 @@ public class FriendDetailPanel : BasePanel
                 string data = id + "," + friendId;
 
                 addFriendRequest.SendRequest(data);
+            }
+            catch (System.Exception e)
+            {
+                Debug.Log(e.Message);
+            }
+        }
+        if (btnText.text == "同意添加")
+        {
+            try
+            {
+                AgreeAddRequest agreeAddRequest = transform.parent.GetComponentInChildren<AgreeAddRequest>();
+                int friendId = int.Parse(idText.text.Split(':')[1]);
+                int id = _facade.GetUserData().LoginId;
+                string data = friendId + "," + id;
+
+                agreeAddRequest.SendRequest(data);
             }
             catch (System.Exception e)
             {

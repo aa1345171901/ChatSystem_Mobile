@@ -44,7 +44,6 @@ public class Facade : MonoBehaviour
 
     private void Start()
     {
-        getUnreadMsg = GetComponent<GetUnreadMessageRequest>();
         OnInit();
     }
 
@@ -69,12 +68,14 @@ public class Facade : MonoBehaviour
         uiManager = new UIManager(this);
         requestManager = new RequestManager(this);
         userManager = new UserManager(this);
-        msgManager = new MessageManager(this, getUnreadMsg);
 
         clientManager.OnInit();
         uiManager.OnInit();
         requestManager.OnInit();
         userManager.OnInit();
+
+        getUnreadMsg = this.gameObject.AddComponent<GetUnreadMessageRequest>();
+        msgManager = new MessageManager(this, getUnreadMsg);
         msgManager.OnInit();
     }
 
@@ -184,11 +185,28 @@ public class Facade : MonoBehaviour
     }
 
     /// <summary>
-    /// 获取未读信息
+    /// 获取未读系统信息
     /// </summary>
     /// <returns></returns>
-    public Dictionary<int, string> GetUnreadMsg()
+    public Dictionary<int, int> GetUnreadSystemMsg()
     {
-        return msgManager.GetUnreadMessage;
+        return msgManager.SystemMsgDic;
+    }
+
+    /// <summary>
+    /// 获取未读好友信息
+    /// </summary>
+    /// <returns></returns>
+    public Dictionary<int, int> GetUnreadFriendMsg()
+    {
+        return msgManager.UserFaceIdDic;
+    }
+
+    /// <summary>
+    /// 点击新朋友，清除
+    /// </summary>
+    public void ClearSystemMsg()
+    {
+        msgManager.ClearSystem();
     }
 }

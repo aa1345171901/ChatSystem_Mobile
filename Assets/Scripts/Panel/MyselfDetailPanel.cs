@@ -54,8 +54,10 @@ public class MyselfDetailPanel : BasePanel
         idText.text = "账号 : " + userData.LoginId;
         sex.text = "性别 : " + userData.Sex;
         age.text = "年龄 : " + userData.Age;
-        star.text = "星座 : " + DataListHelper.StarList[userData.StarId - 1];
-        bloodType.text = "血型 : " + DataListHelper.BloodTypeList[userData.BloodTypeId - 1];
+        string starStr = userData.StarId - 1 >= 0 ? DataListHelper.StarList[userData.StarId - 1] : "";
+        star.text = "星座 : " + starStr;
+        string bloodStr = userData.BloodTypeId - 1 >= 0 ? DataListHelper.BloodTypeList[userData.BloodTypeId - 1] : "";
+        bloodType.text = "血型 : " + bloodStr;
         realName.text = "真实姓名 : " + userData.Name;
 
         // 给头像赋值

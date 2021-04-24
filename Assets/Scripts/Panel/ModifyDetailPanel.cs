@@ -120,7 +120,14 @@ public class ModifyDetailPanel : BasePanel
             dropdown.options.Add(temoData);
         }
         //初始选项的显示
-        dropdown.captionText.text = showNames[showIndex];
+        if (showIndex < 0)
+        {
+            dropdown.captionText.text = "";
+        }
+        else
+        {
+            dropdown.captionText.text = showNames[showIndex];
+        }
         dropdown.value = showIndex;
     }
 
@@ -154,8 +161,8 @@ public class ModifyDetailPanel : BasePanel
         {
             name = realNameIF.text;
         }
-        int starid = starDropDown.value + 1; ;
-        int bloodtypeid = bloodTypeDropDown.value + 1; ;
+        int starid = starDropDown.value + 1;
+        int bloodtypeid = bloodTypeDropDown.value + 1;
         string data = dataId + "," + nickName + "," + sex + "," + age + "," + name + "," + starid + "," + bloodtypeid;
         modifyRequest.SendRequest(data);
     }

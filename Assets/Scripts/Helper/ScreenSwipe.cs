@@ -106,6 +106,5 @@ public class ScreenSwipe : MonoBehaviour
         {
             SendMessage("OnFingerAction", true);
         }
-        Debug.Log(fingerSegmentX);
     }
 }

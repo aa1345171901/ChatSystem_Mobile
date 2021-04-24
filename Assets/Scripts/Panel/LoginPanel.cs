@@ -43,6 +43,7 @@ public class LoginPanel : BasePanel
     /// </summary>
     public override void OnResume()
     {
+        gameObject.SetActive(true);
         if (Facade.GetUserData().LoginId != 0)
         {
             userIdIF.text = Facade.GetUserData().LoginId.ToString();

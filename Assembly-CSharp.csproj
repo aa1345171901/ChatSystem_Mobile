@@ -91,6 +91,7 @@
     <Compile Include="Assets\Scripts\Panel\MyselfDetailPanel.cs" />
     <Compile Include="Assets\Scripts\Panel\RegisterPanel.cs" />
     <Compile Include="Assets\Scripts\Panel\SystemPanel.cs" />
+    <Compile Include="Assets\Scripts\Request\AddFriendMessageRequest.cs" />
     <Compile Include="Assets\Scripts\Request\AddFriendRequest.cs" />
     <Compile Include="Assets\Scripts\Request\AgreeAddRequest.cs" />
     <Compile Include="Assets\Scripts\Request\BaseRequest.cs" />

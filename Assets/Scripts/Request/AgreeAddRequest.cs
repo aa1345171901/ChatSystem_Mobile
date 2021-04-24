@@ -26,11 +26,13 @@ public class AgreeAddRequest : BaseRequest
         {
             int friendId = int.Parse(strs[1]);
             systemPanel.OnResponseAgree(returnCode, "添加失败，服务器出错");
+            systemPanel.isAdd = false;
         }
         else
         {
             int friendId = int.Parse(strs[1]);
             systemPanel.OnResponseAgree(returnCode, "添加成功,请刷新显示");
+            systemPanel.isAdd = true;
         }
     }
 }

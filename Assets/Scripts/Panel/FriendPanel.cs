@@ -31,6 +31,8 @@ public class FriendPanel : BasePanel
 
     private ScreenSwipe screenSwipe;   // 控制滑动panel失效
 
+    private GameObject goNewFriendRightTop; // 新朋友，用于设置右上红点
+
     private void Awake()
     {
         // 获取游戏物体
@@ -71,7 +73,8 @@ public class FriendPanel : BasePanel
 
         GameObject goNewFriend = Instantiate(Resources.Load<GameObject>("Item/NewFriend"));
         goNewFriend.transform.SetParent(content, false);
-        
+        goNewFriendRightTop = goNewFriend.transform.Find("Have").gameObject;
+
         // 给按钮添加事件
         addFriendText = goNewFriend.GetComponent<Button>();
         addFriendText.onClick.AddListener(SystemFriend);
@@ -107,6 +110,7 @@ public class FriendPanel : BasePanel
             PlayerPrefs.SetString(Facade.GetUserData().LoginId + ",ReTime", ReTimeStr);   // 通过id区分不同的账号刷新时间
         }
 
+        // 从服务器获取的好友列表信息
         if (FriendDic != null)
         {
             SetFriendItem();
@@ -114,6 +118,16 @@ public class FriendPanel : BasePanel
             // 将friends保存到本地，不刷新时就可以不访问服务器
             PlayerPrefs.SetString(Facade.GetUserData().LoginId + ",friends", DataHelper.DicToString(FriendDic));
             FriendDic = null;
+        }
+
+        // 如果有未读的系统消息，显示右上红点
+        if (Facade.GetUnreadSystemMsg().Count > 0)
+        {
+            goNewFriendRightTop.SetActive(true);
+        }
+        else
+        {
+            goNewFriendRightTop.SetActive(false);
         }
     }
 
