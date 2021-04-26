@@ -1,4 +1,5 @@
 ﻿using Common;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -9,6 +10,10 @@ public class FriendDetailPanel : BasePanel
 {
     private Button back;
     private Button addAndSendBtn;
+    private Button deleteBtn;
+    private GameObject deletePanel;
+    private Button sure;
+    private Button cancel;
 
     public Text btnText;  // 设置底部按钮是加好友或者发消息
     public Text idText;
@@ -24,11 +29,14 @@ public class FriendDetailPanel : BasePanel
 
     public bool isGet = false;   // 判断好友资料是否获得
 
+    private DeleteFriendRequest deleteFriendRequest;  // 删除好友请求
+
     // Start is called before the first frame update
     void Awake()
     {
         // 获取组件
         back = transform.Find("TopImage/back").GetComponent<Button>();
+        deleteBtn = transform.Find("TopImage/Delete").GetComponent<Button>();
         addAndSendBtn = transform.Find("Button").GetComponent<Button>();
         btnText = transform.Find("Button/Text").GetComponent<Text>();
         nickName = transform.Find("NickName").GetComponent<Text>();
@@ -40,9 +48,20 @@ public class FriendDetailPanel : BasePanel
         realName = transform.Find("bg-down/RealName").GetComponent<Text>();
         faceImage = transform.Find("FaceMask/Image").GetComponent<Image>();
 
+        deletePanel = transform.Find("DeletePanel").gameObject;
+        sure = deletePanel.transform.Find("Sure").GetComponent<Button>();
+        cancel = deletePanel.transform.Find("Cancel").GetComponent<Button>();
+
+        deleteFriendRequest = GetComponent<DeleteFriendRequest>();
+
         // 添加事件
         back.onClick.AddListener(OnClickBack);
         addAndSendBtn.onClick.AddListener(OnClickSendOrAdd);
+        deleteBtn.onClick.AddListener(OnClickDelete);
+        sure.onClick.AddListener(OnClickSure);
+        cancel.onClick.AddListener(OnClickCancel);
+
+        deletePanel.SetActive(false);
     }
 
     public override void OnEnter()
@@ -148,6 +167,49 @@ public class FriendDetailPanel : BasePanel
             uiMng.PopPanel();
             ChatPanel chatPanel = uiMng.PushPanel(UIPanelType.ChatPanel) as ChatPanel;
             chatPanel.SetDetail(int.Parse(idText.text.Split(':')[1]), nickName.text, int.Parse(faceImage.sprite.name));
+        }
+    }
+
+    /// <summary>
+    /// 删除按钮点击
+    /// </summary>
+    private void OnClickDelete()
+    {
+        deletePanel.SetActive(true);
+    }
+
+    private void OnClickSure()
+    {
+        try
+        {
+            deletePanel.SetActive(false);
+            int hostFriendId = Facade.GetUserData().LoginId;
+            int accetFriendId = int.Parse(idText.text.Split(':')[1]);
+            string data = hostFriendId.ToString() + "," + accetFriendId.ToString();
+            deleteFriendRequest.SendRequest(data);
+        }
+        catch (Exception ex)
+        {
+            Debug.Log(ex.Message);
+        }
+    }
+
+    private void OnClickCancel()
+    {
+        deletePanel.SetActive(false);
+    }
+
+    public void OnResponseDelete(ReturnCode returnCode)
+    {
+        if (returnCode == ReturnCode.Fail)
+        {
+            uiMng.ShowMessageSync("删除失败，请稍后重试");
+        }
+        else
+        {
+            uiMng.ShowMessageSync("删除成功，正在刷新好友列表");
+            GetFriendListRequest getFriendListRequest = transform.parent.GetComponentInChildren<GetFriendListRequest>();
+            getFriendListRequest.SendRequest(Facade.GetUserData().GetId.ToString());
         }
     }
 }
