@@ -245,6 +245,7 @@ public class AddFriendPanel : BasePanel
 
         friendDetailPanel.idText.text = "账号 :" + friendId.ToString();
         friendDetailPanel.btnText.text = "加好友";
+        friendDetailPanel.OnHideDelete();
 
         // 获取详细信息请求
         getDetail.SendRequest(friendId.ToString());

@@ -218,10 +218,12 @@ public class SystemPanel : BasePanel
         if (FriendDic.ContainsKey(friendId))
         {
             friendDetailPanel.btnText.text = "发消息";
+            friendDetailPanel.OnHideDelete();
         }
         else
         {
             friendDetailPanel.btnText.text = "同意添加";
+            friendDetailPanel.OnSetDelete();
         }
 
         // 获取详细信息请求

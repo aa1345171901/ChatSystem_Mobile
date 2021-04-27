@@ -153,6 +153,7 @@ public class FriendPanel : BasePanel
     public override void OnResume()
     {
         gameObject.SetActive(true);
+        GetFriendList();
         screenSwipe.enabled = true;
         // 给头像赋值
         string facePath = "FaceImage/" + Facade.GetUserData().FaceId;
@@ -329,6 +330,7 @@ public class FriendPanel : BasePanel
         FriendDetailPanel friendDetailPanel = uiMng.PushPanel(UIPanelType.FriendDetailPanel) as FriendDetailPanel;
         screenSwipe.OnInit();
         friendDetailPanel.btnText.text = "发消息";
+        friendDetailPanel.OnSetDelete();
 
         GetFriendDetailRequest getDetail = friendDetailPanel.GetComponent<GetFriendDetailRequest>();
 

@@ -36,7 +36,7 @@ public class FriendDetailPanel : BasePanel
     {
         // 获取组件
         back = transform.Find("TopImage/back").GetComponent<Button>();
-        deleteBtn = transform.Find("TopImage/Delete").GetComponent<Button>();
+        deleteBtn = transform.Find("Delete").GetComponent<Button>();
         addAndSendBtn = transform.Find("Button").GetComponent<Button>();
         btnText = transform.Find("Button/Text").GetComponent<Text>();
         nickName = transform.Find("NickName").GetComponent<Text>();
@@ -178,6 +178,22 @@ public class FriendDetailPanel : BasePanel
         deletePanel.SetActive(true);
     }
 
+    /// <summary>
+    /// 隐藏delete按钮
+    /// </summary>
+    public void OnHideDelete()
+    {
+        deleteBtn.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// 显示delete按钮
+    /// </summary>
+    public void OnSetDelete()
+    {
+        deleteBtn.gameObject.SetActive(true);
+    }
+
     private void OnClickSure()
     {
         try
@@ -208,8 +224,8 @@ public class FriendDetailPanel : BasePanel
         else
         {
             uiMng.ShowMessageSync("删除成功，正在刷新好友列表");
-            GetFriendListRequest getFriendListRequest = transform.parent.GetComponentInChildren<GetFriendListRequest>();
-            getFriendListRequest.SendRequest(Facade.GetUserData().GetId.ToString());
+            //GetFriendListRequest getFriendListRequest = transform.parent.GetComponentInChildren<GetFriendListRequest>();
+            //getFriendListRequest.SendRequest(Facade.GetUserData().GetId.ToString());
         }
     }
 }
