@@ -103,6 +103,7 @@
     <Compile Include="Assets\Scripts\Request\ModifyRequest.cs" />
     <Compile Include="Assets\Scripts\Request\RegisterRequest.cs" />
     <Compile Include="Assets\Scripts\Request\SearchFriendRequest.cs" />
+    <Compile Include="Assets\Scripts\Request\SendByChatRequest.cs" />
     <Compile Include="Assets\Scripts\Request\SetSystemFaceRequest.cs" />
     <Compile Include="Assets\UIFramework\Base\BasePanel.cs" />
     <Compile Include="Assets\UIFramework\Extension\DictionaryExtension.cs" />
