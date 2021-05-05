@@ -32,6 +32,7 @@ public class FriendPanel : BasePanel
     private ScreenSwipe screenSwipe;   // 控制滑动panel失效
 
     private GameObject goNewFriendRightTop; // 新朋友，用于设置右上红点
+    private GameObject mainHave;    // 用于设置消息panel是否
 
     private void Awake()
     {
@@ -39,6 +40,7 @@ public class FriendPanel : BasePanel
         messageImg = GameObject.Find("DownColumn/messageButton1");
         friendImg = GameObject.Find("DownColumn/friendButton1");
         friendQImg = GameObject.Find("DownColumn/friendQButton1");
+        mainHave = GameObject.Find("DownColumn/messageButton1/have");
 
         // 获取组件
         content = transform.Find("Scroll View/Viewport/Content").GetComponent<RectTransform>();
@@ -57,6 +59,8 @@ public class FriendPanel : BasePanel
         getFriendListRequest = GetComponent<GetFriendListRequest>();
 
         addFriendImg.onClick.AddListener(AddFriendClick);
+
+        mainHave.SetActive(false);
     }
 
     /// <summary>
@@ -129,6 +133,15 @@ public class FriendPanel : BasePanel
         {
             goNewFriendRightTop.SetActive(false);
         }
+
+        if (Facade.GetUnreadFriendMsg().Count > 0)
+        {
+            mainHave.SetActive(true);
+        }
+        else
+        {
+            mainHave.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -140,6 +153,7 @@ public class FriendPanel : BasePanel
         messageImg.transform.localScale = new Vector3(1, 1, 1);
         friendQImg.transform.localScale = new Vector3(1, 1, 1);
         EnterAnimation(friendImg);
+        mainHave.SetActive(false);
 
         // 给头像赋值
         string facePath = "FaceImage/" + Facade.GetUserData().FaceId;

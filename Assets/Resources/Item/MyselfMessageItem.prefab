@@ -61,14 +61,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 91a86e00667d04e479cf0c3cad5b98ec, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -293,6 +293,7 @@ GameObject:
   - component: {fileID: 3389455382289916749}
   - component: {fileID: 8082041090024159568}
   - component: {fileID: 2497870476985978998}
+  - component: {fileID: 7877105161082516350}
   m_Layer: 5
   m_Name: Message
   m_TagString: Untagged
@@ -314,11 +315,11 @@ RectTransform:
   m_Father: {fileID: 62394698693115468}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -24.6, y: 0.000012398}
-  m_SizeDelta: {x: 230.1, y: 40}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.8114953, y: 1}
+  m_AnchorMax: {x: 0.8114953, y: 1}
+  m_AnchoredPosition: {x: 1.449997, y: 0.000062942505}
+  m_SizeDelta: {x: 230.1, y: 0}
+  m_Pivot: {x: 1, y: 0.99999976}
 --- !u!222 &8082041090024159568
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -362,4 +363,22 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: '2021.4.20
 
+    this is message content
+
+    this is message content
+
     this is message content'
+--- !u!114 &7877105161082516350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8264574415155558571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1741964061, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2

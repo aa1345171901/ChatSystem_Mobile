@@ -14,4 +14,11 @@ public class SendByChatRequest : BaseRequest
         actionCode = ActionCode.SendByChat;
         base.Awake();
     }
+
+    public override void OnResponse(string data)
+    {
+        string[] strs = data.Split(',');
+        ReturnCode returnCode = (ReturnCode)int.Parse(strs[0]);
+        chatPanel.OnResponseChatSend(returnCode);
+    }
 }

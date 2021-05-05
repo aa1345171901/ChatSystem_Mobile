@@ -18,16 +18,23 @@ public class MainPanel : BasePanel
 
     private ScreenSwipe screenSwipe;
 
+    private string ChatData;
+    private GameObject freindPanelHave;  // 是否有好友请求
+    private Dictionary<int, (int, string, string, string)> chatDic = new Dictionary<int, (int, string, string, string)>();  // 好友消息
+    private List<GameObject> chatItems = new List<GameObject>();
+
     private void Awake()
     {
         // 获取游戏物体
         messageImg = GameObject.Find("DownColumn/messageButton");
         friendImg = GameObject.Find("DownColumn/friendButton");
         friendQImg = GameObject.Find("DownColumn/friendQButton");
+        freindPanelHave = GameObject.Find("DownColumn/friendButton/have");
 
         // 给物体添加事件
         friendImg.GetComponent<Button>().onClick.AddListener(OnClickFriendBtn);
         friendQImg.GetComponent<Button>().onClick.AddListener(OnClickFriendQBtn);
+        freindPanelHave.SetActive(false);
 
         // 寻找组件
         content = transform.Find("Scroll View/Viewport/Content").GetComponent<RectTransform>();
@@ -46,6 +53,23 @@ public class MainPanel : BasePanel
         // 设置layout空隙
         GameObject space = Instantiate(Resources.Load<GameObject>("Item/Spacing"));
         space.transform.SetParent(content, false);
+
+        // 获取本地的好友消息漫游
+        string chatsStr = PlayerPrefs.GetString(Facade.GetUserData().LoginId + "chats");
+        if (!string.IsNullOrEmpty(chatsStr))
+        {
+            string[] strs = chatsStr.Split('-');
+            for (int i = 0; i < strs.Length - 1; i++)
+            {
+                int id = int.Parse(strs[i].Split(',')[0]);
+                int faceid = int.Parse(strs[i].Split(',')[1]);
+                string nickName = strs[i].Split(',')[2];
+                string message = strs[i].Split(',')[3];
+                string date = strs[i].Split(',')[4];
+                chatDic.Add(id, (faceid, nickName, message, date));
+            }
+            SetChatItem();
+        }
     }
 
     /// <summary>
@@ -58,6 +82,8 @@ public class MainPanel : BasePanel
         friendQImg.transform.localScale = new Vector3(1, 1, 1);
         EnterAnimation(messageImg);
 
+        freindPanelHave.SetActive(false);
+
         // 不在start赋值，可能更改个人消息
         // 给nickName赋值
         nickName.text = Facade.GetUserData().NickName;
@@ -66,6 +92,25 @@ public class MainPanel : BasePanel
         string facePath = "FaceImage/" + Facade.GetUserData().FaceId;
         Sprite faceImg = Resources.Load<Sprite>(facePath);
         face.sprite = faceImg;
+    }
+
+    private void Update()
+    {
+        if (Facade.GetUnreadFriendMsg().Count > 0)
+        {
+
+            SetChatItem();
+            PlayerPrefs.SetString(Facade.GetUserData().LoginId + "chats", ChatData);
+        }
+
+        if (Facade.GetUnreadSystemMsg().Count > 0)
+        {
+            freindPanelHave.SetActive(true);
+        }
+        else
+        {
+            freindPanelHave.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -157,6 +202,60 @@ public class MainPanel : BasePanel
     public void HideAnimation(GameObject go)
     {
         Tween tween = go.transform.DOScale(0, 0.1f);
+    }
+
+    /// <summary>
+    /// 设置好友消息列表
+    /// </summary>
+    private void SetChatItem()
+    {
+        // 设置layout大小
+        Vector2 size = content.sizeDelta;
+        content.sizeDelta = new Vector2(size.x, 25 + 40 * (chatDic.Count + 1));
+
+        ChatData = "";
+
+        int[] keys = new int[chatDic.Count];
+        int j = 0;
+        foreach (int key in chatDic.Keys) keys[j++] = key;
+
+        for (int i = 0; i < chatDic.Count; i++)
+        {
+            chatDic.TryGetValue(keys[i], out (int, string, string, string) item);
+            ChatData += keys[i] + "," + item.Item1 + "," + item.Item2 + item.Item3 + "," + item.Item4 + "-";
+            // friendGOs里有就不用生成
+            GameObject go;
+            go = Instantiate(Resources.Load<GameObject>("Item/ChatItem"));
+            chatItems.Add(go);
+
+            string nickName = item.Item2;
+            int faceId = item.Item1;
+
+            // 设置子物体属性
+            go.transform.Find("NickName").GetComponent<Text>().text = nickName;
+            go.transform.Find("ChatRecord").GetComponent<Text>().text = item.Item3;
+            go.transform.Find("Date").GetComponent<Text>().text = item.Item4;
+            go.name = keys[i].ToString();
+
+            string facePath = "FaceImage/" + faceId;
+            Sprite face = Resources.Load<Sprite>(facePath);
+            go.transform.Find("FaceMask/Image").GetComponent<Image>().sprite = face;
+
+            go.GetComponent<Button>().onClick.AddListener(OnClickChatItem);
+            // 设置父物体
+            go.transform.SetParent(content, false);
+        }
+    }
+
+    private void OnClickChatItem()
+    {
+        //通过 UnityEngine.EventSystems的底层来获取到当前点击的对象
+        var button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+        int friendId = int.Parse(button.name);
+
+        uiMng.PopPanel();
+        ChatPanel chatPanel = uiMng.PushPanel(UIPanelType.ChatPanel) as ChatPanel;
+        chatPanel.SetDetail(friendId, nickName.text, int.Parse(button.transform.Find("FaceMask/Image").GetComponent<Image>().sprite.name));
     }
 
     /// <summary>
