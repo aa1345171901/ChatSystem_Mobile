@@ -209,4 +209,12 @@ public class Facade : MonoBehaviour
     {
         msgManager.ClearSystem();
     }
+
+    /// <summary>
+    /// 点击新朋友，清除
+    /// </summary>
+    public void ClearFriend()
+    {
+        msgManager.ClearFriend();
+    }
 }

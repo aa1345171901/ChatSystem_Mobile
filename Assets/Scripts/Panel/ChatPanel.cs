@@ -24,7 +24,7 @@ public class ChatPanel : BasePanel
     private string message = null; // 接收一条消息
     private long ticks;
 
-    private ChatByReceiveRequest chatReceiveRequest;
+    //private ChatByReceiveRequest chatReceiveRequest;
     private SendByChatRequest chatSendRequest;
 
     private float timer = 0;
@@ -40,7 +40,7 @@ public class ChatPanel : BasePanel
 
         content = transform.Find("Scroll View/Viewport/Content").GetComponent<RectTransform>();
 
-        chatReceiveRequest = GetComponent<ChatByReceiveRequest>();
+        //chatReceiveRequest = GetComponent<ChatByReceiveRequest>();
         chatSendRequest = GetComponent<SendByChatRequest>();
 
         // 设置事件
@@ -204,7 +204,7 @@ public class ChatPanel : BasePanel
         {
             int id = Facade.GetUserData().LoginId;
             string data = id + "," + friendId;
-            chatReceiveRequest.SendRequest(data);
+            //chatReceiveRequest.SendRequest(data);
         }
         catch (Exception ex)
         {

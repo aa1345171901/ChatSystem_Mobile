@@ -101,4 +101,9 @@ public class MessageManager : BaseManager
     {
         SystemMsgDic.Clear();
     }
+
+    public void ClearFriend()
+    {
+        UserFaceIdDic.Clear();
+    }
 }

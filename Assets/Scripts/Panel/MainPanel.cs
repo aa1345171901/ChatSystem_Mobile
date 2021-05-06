@@ -22,6 +22,9 @@ public class MainPanel : BasePanel
     private GameObject freindPanelHave;  // 是否有好友请求
     private Dictionary<int, (int, string, string, string)> chatDic = new Dictionary<int, (int, string, string, string)>();  // 好友消息
     private List<GameObject> chatItems = new List<GameObject>();
+    public int getCount = 0;  // 获取的消息数量
+
+    private ChatByReceiveRequest chatReceiveRequest;
 
     private void Awake()
     {
@@ -41,6 +44,8 @@ public class MainPanel : BasePanel
 
         nickName = transform.Find("TopColumn/NickName").GetComponent<Text>();
         face = transform.Find("TopColumn/face").GetComponent<Image>();
+
+        chatReceiveRequest = GetComponent<ChatByReceiveRequest>();
 
         screenSwipe = GetComponent<ScreenSwipe>();
     }
@@ -98,9 +103,20 @@ public class MainPanel : BasePanel
     {
         if (Facade.GetUnreadFriendMsg().Count > 0)
         {
+            Dictionary<int, int> dict = Facade.GetUnreadFriendMsg();
+            foreach (var item in dict)
+            {
+                GetReceive(item.Key);
+                chatDic.Add(item.Key,((item.Value),null,null,null));
+            }          
+            Facade.ClearFriend();
+        }
 
+        if (getCount != 0)
+        {
             SetChatItem();
             PlayerPrefs.SetString(Facade.GetUserData().LoginId + "chats", ChatData);
+            getCount = 0;
         }
 
         if (Facade.GetUnreadSystemMsg().Count > 0)
@@ -202,6 +218,29 @@ public class MainPanel : BasePanel
     public void HideAnimation(GameObject go)
     {
         Tween tween = go.transform.DOScale(0, 0.1f);
+    }
+
+    /// <summary>
+    /// 接收消息,接收一条
+    /// </summary>
+    private void GetReceive(int friendId)
+    {
+        try
+        {
+            int id = Facade.GetUserData().LoginId;
+            string data = id + "," + friendId;
+            chatReceiveRequest.SendRequest(data);
+        }
+        catch (Exception ex)
+        {
+            uiMng.ShowMessage("未知错误" + ex.Message);
+        }
+    }
+
+    public void AddDict(int id, string nickName, string message, long ticks)
+    {
+        DateTime date = new DateTime(ticks);
+        chatDic[id] = (chatDic[id].Item1,nickName, message, date.ToLongTimeString());
     }
 
     /// <summary>

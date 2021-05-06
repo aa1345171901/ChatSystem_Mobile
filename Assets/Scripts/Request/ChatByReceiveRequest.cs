@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class ChatByReceiveRequest : BaseRequest
 {
-    private ChatPanel chatPanel;
+    private MainPanel mainPanel;
 
     public override void Awake()
     {
-        chatPanel = GetComponent<ChatPanel>();
+        mainPanel = GetComponent<MainPanel>();
         requestCode = RequestCode.Message;
         actionCode = ActionCode.ChatByReceive;
         base.Awake();
@@ -19,9 +19,17 @@ public class ChatByReceiveRequest : BaseRequest
     {
         string[] strs = data.Split(',');
         ReturnCode returnCode = (ReturnCode)int.Parse(strs[0]);
-        int friendId = int.Parse(strs[1]);
-        string message = strs[2];
-        long ticks = long.Parse(strs[3]);
-        chatPanel.OnResponseChatReceive(returnCode, message, ticks);
+        if (returnCode == ReturnCode.Success)
+        {
+            lock (mainPanel)
+            {
+                int friendId = int.Parse(strs[1]);
+                string message = strs[2];
+                long ticks = long.Parse(strs[3]);
+                string nickName = strs[4];
+                mainPanel.getCount++;
+                mainPanel.AddDict(friendId, nickName, message, ticks);
+            }
+        }
     }
 }
