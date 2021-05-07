@@ -15,7 +15,7 @@ public class MessageManager : BaseManager
         }
     }
 
-    public Dictionary<int, int> UserFaceIdDic { get; } // 消息的发起者与发消息的好友的头像Id
+    public Dictionary<int, (int, string, string, string)> UserFriendMsgDic { get; } // 消息的发起者与发消息的好友的头像Id
     public Dictionary<int, int> SystemMsgDic { get; }   // 系统消息好友的头像Id
 
     private GetUnreadMessageRequest getMsgRequest;
@@ -24,7 +24,7 @@ public class MessageManager : BaseManager
     public MessageManager(Facade facade, GetUnreadMessageRequest getMsgRequest):base(facade)
     {
         dict = null;
-        UserFaceIdDic = new Dictionary<int, int>();
+        UserFriendMsgDic = new Dictionary<int, (int, string, string, string)>();
         SystemMsgDic = new Dictionary<int, int>();
         this.getMsgRequest = getMsgRequest;
     }
@@ -83,9 +83,9 @@ public class MessageManager : BaseManager
                 {
                     try
                     {
-                        if (!UserFaceIdDic.ContainsKey(int.Parse(strs[0])))
+                        if (!UserFriendMsgDic.ContainsKey(int.Parse(strs[0])))
                         {
-                            UserFaceIdDic.Add(int.Parse(strs[0]), int.Parse(strs[4]));   // 设置发消息的好友的头像索引
+                            UserFriendMsgDic.Add(int.Parse(strs[0]), (int.Parse(strs[4]), strs[5], strs[6], strs[7]));   // 设置发消息的好友的头像索引
                         }
                     }
                     catch (Exception ex)
@@ -104,6 +104,6 @@ public class MessageManager : BaseManager
 
     public void ClearFriend()
     {
-        UserFaceIdDic.Clear();
+        UserFriendMsgDic.Clear();
     }
 }

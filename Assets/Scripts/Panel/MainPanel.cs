@@ -24,8 +24,6 @@ public class MainPanel : BasePanel
     private List<GameObject> chatItems = new List<GameObject>();
     public int getCount = 0;  // 获取的消息数量
 
-    private ChatByReceiveRequest chatReceiveRequest;
-
     private void Awake()
     {
         // 获取游戏物体
@@ -44,8 +42,6 @@ public class MainPanel : BasePanel
 
         nickName = transform.Find("TopColumn/NickName").GetComponent<Text>();
         face = transform.Find("TopColumn/face").GetComponent<Image>();
-
-        chatReceiveRequest = GetComponent<ChatByReceiveRequest>();
 
         screenSwipe = GetComponent<ScreenSwipe>();
     }
@@ -103,20 +99,22 @@ public class MainPanel : BasePanel
     {
         if (Facade.GetUnreadFriendMsg().Count > 0)
         {
-            Dictionary<int, int> dict = Facade.GetUnreadFriendMsg();
+            Dictionary<int, (int, string, string, string)> dict = Facade.GetUnreadFriendMsg();
             foreach (var item in dict)
             {
-                GetReceive(item.Key);
-                chatDic.Add(item.Key,((item.Value),null,null,null));
-            }          
-            Facade.ClearFriend();
-        }
-
-        if (getCount != 0)
-        {
+                //GetReceive(item.Key);
+                if (chatDic.ContainsKey(item.Key))
+                {
+                    chatDic[item.Key] = item.Value;
+                }
+                else
+                {
+                    chatDic.Add(item.Key, item.Value);
+                }
+            }
             SetChatItem();
             PlayerPrefs.SetString(Facade.GetUserData().LoginId + "chats", ChatData);
-            getCount = 0;
+            Facade.ClearFriend();
         }
 
         if (Facade.GetUnreadSystemMsg().Count > 0)
@@ -220,23 +218,6 @@ public class MainPanel : BasePanel
         Tween tween = go.transform.DOScale(0, 0.1f);
     }
 
-    /// <summary>
-    /// 接收消息,接收一条
-    /// </summary>
-    private void GetReceive(int friendId)
-    {
-        try
-        {
-            int id = Facade.GetUserData().LoginId;
-            string data = id + "," + friendId;
-            chatReceiveRequest.SendRequest(data);
-        }
-        catch (Exception ex)
-        {
-            uiMng.ShowMessage("未知错误" + ex.Message);
-        }
-    }
-
     public void AddDict(int id, string nickName, string message, long ticks)
     {
         DateTime date = new DateTime(ticks);
@@ -261,11 +242,18 @@ public class MainPanel : BasePanel
         for (int i = 0; i < chatDic.Count; i++)
         {
             chatDic.TryGetValue(keys[i], out (int, string, string, string) item);
-            ChatData += keys[i] + "," + item.Item1 + "," + item.Item2 + item.Item3 + "," + item.Item4 + "-";
+            ChatData += keys[i] + "," + item.Item1 + "," + item.Item2 + "," + item.Item3 + "," + item.Item4 + "-";
             // friendGOs里有就不用生成
             GameObject go;
-            go = Instantiate(Resources.Load<GameObject>("Item/ChatItem"));
-            chatItems.Add(go);
+            if (chatItems.Count > i)
+            {
+                go = chatItems[i];
+            }
+            else
+            {
+                go = Instantiate(Resources.Load<GameObject>("Item/ChatItem"));
+                chatItems.Add(go);
+            }
 
             string nickName = item.Item2;
             int faceId = item.Item1;
@@ -273,7 +261,7 @@ public class MainPanel : BasePanel
             // 设置子物体属性
             go.transform.Find("NickName").GetComponent<Text>().text = nickName;
             go.transform.Find("ChatRecord").GetComponent<Text>().text = item.Item3;
-            go.transform.Find("Date").GetComponent<Text>().text = item.Item4;
+            go.transform.Find("Date").GetComponent<Text>().text = new DateTime(long.Parse(item.Item4)).ToLongTimeString();
             go.name = keys[i].ToString();
 
             string facePath = "FaceImage/" + faceId;
@@ -292,9 +280,11 @@ public class MainPanel : BasePanel
         var button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
         int friendId = int.Parse(button.name);
 
-        uiMng.PopPanel();
+        //uiMng.PopPanel();
         ChatPanel chatPanel = uiMng.PushPanel(UIPanelType.ChatPanel) as ChatPanel;
-        chatPanel.SetDetail(friendId, nickName.text, int.Parse(button.transform.Find("FaceMask/Image").GetComponent<Image>().sprite.name));
+        int faceId = 1;
+        int.TryParse(button.transform.Find("FaceMask/Image").GetComponent<Image>().sprite.name.Trim(), out faceId);
+        chatPanel.SetDetail(friendId, nickName.text, faceId);
     }
 
     /// <summary>

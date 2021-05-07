@@ -197,9 +197,9 @@ public class Facade : MonoBehaviour
     /// 获取未读好友信息
     /// </summary>
     /// <returns></returns>
-    public Dictionary<int, int> GetUnreadFriendMsg()
+    public Dictionary<int, (int, string, string, string)> GetUnreadFriendMsg()
     {
-        return msgManager.UserFaceIdDic;
+        return msgManager.UserFriendMsgDic;
     }
 
     /// <summary>

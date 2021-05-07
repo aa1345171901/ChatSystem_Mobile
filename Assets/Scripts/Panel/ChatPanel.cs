@@ -24,7 +24,7 @@ public class ChatPanel : BasePanel
     private string message = null; // 接收一条消息
     private long ticks;
 
-    //private ChatByReceiveRequest chatReceiveRequest;
+    private ChatByReceiveRequest chatReceiveRequest;
     private SendByChatRequest chatSendRequest;
 
     private float timer = 0;
@@ -40,7 +40,7 @@ public class ChatPanel : BasePanel
 
         content = transform.Find("Scroll View/Viewport/Content").GetComponent<RectTransform>();
 
-        //chatReceiveRequest = GetComponent<ChatByReceiveRequest>();
+        chatReceiveRequest = GetComponent<ChatByReceiveRequest>();
         chatSendRequest = GetComponent<SendByChatRequest>();
 
         // 设置事件
@@ -58,7 +58,7 @@ public class ChatPanel : BasePanel
     {
         if (message != null)
         {
-            SetChatItem(faceId, message, ticks, false);
+            SetChatItem(faceId, message, ticks, false, true);
             message = null;
         }
     }
@@ -76,10 +76,15 @@ public class ChatPanel : BasePanel
     /// </summary>
     public override void OnEnter()
     {
+        foreach (var item in chatItems)
+        {
+            GameObject.Destroy(item);
+        }
         string chatsStr = PlayerPrefs.GetString(Facade.GetUserData().LoginId + friendId + "messages", GetStringByList(messages));
         if (!string.IsNullOrEmpty(chatsStr))
         {
             messages = GetListByString(chatsStr);
+            messages.RemoveAt(messages.Count - 1);
             int i = messages.Count >= 10 ? 9 : messages.Count - 1;
             for (; i >= 0; i--)
             {
@@ -87,8 +92,9 @@ public class ChatPanel : BasePanel
                 int faceId = int.Parse(msg[0]) == friendId ? this.faceId : Facade.GetUserData().FaceId;
                 long ticks = long.Parse(msg[1]);
                 string message = msg[2];
-                SetChatItem(faceId, message, ticks, faceId == this.faceId);
+                SetChatItem(faceId, message, ticks, faceId != this.faceId, false);
             }
+            messages.Clear();
         }
 
         this.gameObject.SetActive(true);
@@ -137,7 +143,7 @@ public class ChatPanel : BasePanel
             delta = datetime.Subtract(epoc);
             long ticks = (long)delta.TotalMilliseconds;
             string data = id + "," + friendId + "," + message + "," + ticks;
-            SetChatItem(Facade.GetUserData().FaceId,message, ticks, true);
+            SetChatItem(Facade.GetUserData().FaceId,message, ticks, true, true);
             chatSendRequest.SendRequest(data);
         }
         catch (Exception ex)
@@ -149,7 +155,7 @@ public class ChatPanel : BasePanel
     /// <summary>
     /// 设置聊天消息
     /// </summary>
-    private void SetChatItem(int faceId, string message, long ticks, bool isSelf)
+    private void SetChatItem(int faceId, string message, long ticks, bool isSelf, bool isFirst)
     {
         // 设置layout大小
         Vector2 size = content.sizeDelta;
@@ -187,7 +193,8 @@ public class ChatPanel : BasePanel
         string dataChat = "";
         int id = isSelf == true ? Facade.GetUserData().LoginId : friendId;
         dataChat = id + "},{" + ticks + "},{" + message;
-        messages.Add(dataChat);
+        if (isFirst)
+            messages.Add(dataChat);
         if (messages.Count >= 100)
         {
             messages.RemoveAt(0);
@@ -204,7 +211,7 @@ public class ChatPanel : BasePanel
         {
             int id = Facade.GetUserData().LoginId;
             string data = id + "," + friendId;
-            //chatReceiveRequest.SendRequest(data);
+            chatReceiveRequest.SendRequest(data);
         }
         catch (Exception ex)
         {
