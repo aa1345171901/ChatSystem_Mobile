@@ -68,7 +68,8 @@ public class ChatPanel : BasePanel
     /// </summary>
     private void BackBtnClick()
     {
-        Facade.Instance.PopPanel();
+        uiMng.PopPanel();
+        uiMng.PushPanel(UIPanelType.MainPanel);
     }
 
     /// <summary>
@@ -76,10 +77,14 @@ public class ChatPanel : BasePanel
     /// </summary>
     public override void OnEnter()
     {
+        this.gameObject.SetActive(true);
+        EnterAnimation();
+
         foreach (var item in chatItems)
         {
             GameObject.Destroy(item);
         }
+        chatItems.Clear();
         string chatsStr = PlayerPrefs.GetString(Facade.GetUserData().LoginId + friendId + "messages", GetStringByList(messages));
         if (!string.IsNullOrEmpty(chatsStr))
         {
@@ -94,11 +99,7 @@ public class ChatPanel : BasePanel
                 string message = msg[2];
                 SetChatItem(faceId, message, ticks, faceId != this.faceId, false);
             }
-            messages.Clear();
         }
-
-        this.gameObject.SetActive(true);
-        EnterAnimation();
     }
 
     /// <summary>
@@ -124,7 +125,6 @@ public class ChatPanel : BasePanel
     public void HideAnimation()
     {
         Tween tween = transform.DOLocalMoveX(300, 0.4f);
-        tween.OnComplete(() => gameObject.SetActive(false));
     }
 
     /// <summary>
@@ -174,9 +174,10 @@ public class ChatPanel : BasePanel
         chatItems.Add(go);
 
         // 设置子物体属性
-        DateTime date = new DateTime(ticks);
+        DateTime sendTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+        sendTime = sendTime.AddMilliseconds(ticks);
 
-        go.transform.Find("Message").GetComponent<Text>().text = date.ToLongTimeString() + "\n" + message;
+        go.transform.Find("Message").GetComponent<Text>().text = sendTime.ToLongTimeString() + "\n" + message;
 
         string facePath = "FaceImage/" + faceId;
         Sprite face = Resources.Load<Sprite>(facePath);

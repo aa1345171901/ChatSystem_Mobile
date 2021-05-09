@@ -95,6 +95,18 @@ public class FriendDetailPanel : BasePanel
         gameObject.SetActive(false);
     }
 
+    public override void OnPause()
+    {
+        base.OnPause();
+        gameObject.SetActive(false);
+    }
+
+    public override void OnResume()
+    {
+        base.OnResume();
+        gameObject.SetActive(true);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -164,7 +176,7 @@ public class FriendDetailPanel : BasePanel
         }
         else
         {
-            uiMng.PopPanel();
+            //uiMng.PopPanel();
             ChatPanel chatPanel = uiMng.PushPanel(UIPanelType.ChatPanel) as ChatPanel;
             chatPanel.SetDetail(int.Parse(idText.text.Split(':')[1]), nickName.text, int.Parse(faceImage.sprite.name));
         }

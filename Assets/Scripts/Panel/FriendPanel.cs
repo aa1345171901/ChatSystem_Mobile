@@ -189,8 +189,13 @@ public class FriendPanel : BasePanel
     /// </summary>
     public override void OnPause()
     {
-        //gameObject.SetActive(false);
+        Invoke("SetActive",0.5f);
         screenSwipe.enabled = false;
+    }
+
+    private void SetActive()
+    {
+        gameObject.SetActive(false);
     }
 
     /// <summary>
