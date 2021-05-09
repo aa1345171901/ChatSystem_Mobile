@@ -191,9 +191,11 @@ public class SystemPanel : BasePanel
             }
             else
             {
+                go.transform.Find("AddBtn").GetComponent<Button>().onClick.RemoveAllListeners();
                 go.transform.Find("AddBtn").GetComponent<Button>().onClick.AddListener(OnItemClick);
             }
 
+            go.GetComponent<Button>().onClick.RemoveAllListeners();
             go.GetComponent<Button>().onClick.AddListener(OnFriendItemClick);
             // 设置父物体
             go.transform.SetParent(content, false);
@@ -218,12 +220,12 @@ public class SystemPanel : BasePanel
         if (FriendDic.ContainsKey(friendId))
         {
             friendDetailPanel.btnText.text = "发消息";
-            friendDetailPanel.OnHideDelete();
         }
         else
         {
             friendDetailPanel.btnText.text = "同意添加";
             friendDetailPanel.OnSetDelete();
+            friendDetailPanel.OnHideDelete();
         }
 
         // 获取详细信息请求

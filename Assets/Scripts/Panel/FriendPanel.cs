@@ -326,6 +326,7 @@ public class FriendPanel : BasePanel
             Sprite face = Resources.Load<Sprite>(facePath);
             go.transform.Find("FaceMask/Image").GetComponent<Image>().sprite = face;
 
+            go.GetComponent<Button>().onClick.RemoveAllListeners();
             go.GetComponent<Button>().onClick.AddListener(OnFriendItemClick);
 
             // 设置父物体

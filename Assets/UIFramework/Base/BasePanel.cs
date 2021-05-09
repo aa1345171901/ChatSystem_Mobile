@@ -6,6 +6,9 @@ public class BasePanel : MonoBehaviour {
 
     protected UIManager uiMng;
     protected Facade _facade;
+    private bool isEnter = false;
+
+    public bool IsEnter { get { return isEnter; } }
 
     public Facade Facade
     {
@@ -33,7 +36,7 @@ public class BasePanel : MonoBehaviour {
     /// </summary>
 	public virtual void OnEnter()
     {
-
+        isEnter = true;
     }
 
     /// <summary>
@@ -41,7 +44,7 @@ public class BasePanel : MonoBehaviour {
     /// </summary>
     public virtual void OnPause()
     {
-
+        isEnter = false;
     }
 
     /// <summary>
@@ -49,7 +52,7 @@ public class BasePanel : MonoBehaviour {
     /// </summary>
     public virtual void OnResume()
     {
-
+        isEnter = true;
     }
 
     /// <summary>
@@ -57,6 +60,6 @@ public class BasePanel : MonoBehaviour {
     /// </summary>
     public virtual void OnExit()
     {
-
+        isEnter = false;
     }
 }

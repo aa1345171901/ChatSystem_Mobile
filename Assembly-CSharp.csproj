@@ -97,6 +97,7 @@
     <Compile Include="Assets\Scripts\Request\BaseRequest.cs" />
     <Compile Include="Assets\Scripts\Request\ChatByReceiveRequest.cs" />
     <Compile Include="Assets\Scripts\Request\DeleteFriendRequest.cs" />
+    <Compile Include="Assets\Scripts\Request\GetAllReciveMsgsRequest.cs" />
     <Compile Include="Assets\Scripts\Request\GetFriendDetailRequest.cs" />
     <Compile Include="Assets\Scripts\Request\GetFriendListRequest.cs" />
     <Compile Include="Assets\Scripts\Request\GetUnreadMessageRequest.cs" />

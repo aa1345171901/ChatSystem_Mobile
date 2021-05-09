@@ -29,7 +29,7 @@ public class GetUnreadMessageRequest : BaseRequest
             string strList = data.Substring(2);
             string[] listString = strList.Split('-');
             Dictionary<int, string> dict = new Dictionary<int, string>();
-            for (int i = 0; i < listString.Length - 1; i++)
+            for (int i = 0; i < listString.Length - 2; i++)
             {
                 string[] strs1 = listString[i].Split('_');
                 if (!dict.ContainsKey(int.Parse(strs1[0])))

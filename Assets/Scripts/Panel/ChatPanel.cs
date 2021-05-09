@@ -16,6 +16,8 @@ public class ChatPanel : BasePanel
     private RectTransform content;
     private List<GameObject> chatItems = new List<GameObject>();
     private List<string> messages = new List<string>();
+    public List<(string, long)> getReceiveDict = new List<(string, long)>();
+    private Scrollbar scrollbar;
 
     private int friendId;
     private int faceId;
@@ -26,6 +28,7 @@ public class ChatPanel : BasePanel
 
     private ChatByReceiveRequest chatReceiveRequest;
     private SendByChatRequest chatSendRequest;
+    private GetAllReciveMsgsRequest getAllReciveMsgs;
 
     private float timer = 0;
 
@@ -42,6 +45,9 @@ public class ChatPanel : BasePanel
 
         chatReceiveRequest = GetComponent<ChatByReceiveRequest>();
         chatSendRequest = GetComponent<SendByChatRequest>();
+        getAllReciveMsgs = GetComponent<GetAllReciveMsgsRequest>();
+
+        scrollbar = transform.Find("Scroll View/Scrollbar Vertical").GetComponent<Scrollbar>();
 
         // 设置事件
         backBtn.onClick.AddListener(BackBtnClick);
@@ -56,10 +62,19 @@ public class ChatPanel : BasePanel
     // Update is called once per frame
     void Update()
     {
-        if (message != null)
+        if (message != null && IsEnter)
         {
             SetChatItem(faceId, message, ticks, false, true);
             message = null;
+        }
+
+        if (getReceiveDict.Count != 0)
+        {
+            foreach (var item in getReceiveDict)
+            {
+                SetChatItem(faceId, item.Item1, item.Item2, false, true);
+            }
+            getReceiveDict.Clear();
         }
     }
 
@@ -78,20 +93,21 @@ public class ChatPanel : BasePanel
     public override void OnEnter()
     {
         this.gameObject.SetActive(true);
+        chatReceiveRequest.Init();
         EnterAnimation();
 
-        foreach (var item in chatItems)
-        {
-            GameObject.Destroy(item);
-        }
-        chatItems.Clear();
-        string chatsStr = PlayerPrefs.GetString(Facade.GetUserData().LoginId + friendId + "messages", GetStringByList(messages));
+        Invoke("SetItem", 0.5f);
+    }
+
+    private void SetItem()
+    {
+        string chatsStr = PlayerPrefs.GetString(Facade.GetUserData().LoginId.ToString() + "," + friendId.ToString() + "messages");
         if (!string.IsNullOrEmpty(chatsStr))
         {
             messages = GetListByString(chatsStr);
             messages.RemoveAt(messages.Count - 1);
-            int i = messages.Count >= 10 ? 9 : messages.Count - 1;
-            for (; i >= 0; i--)
+            int i = messages.Count >= 10 ? messages.Count - 10 : 0;
+            for (; i < messages.Count; i++)
             {
                 string[] msg = messages[i].Split(new string[] { "},{" }, StringSplitOptions.None);
                 int faceId = int.Parse(msg[0]) == friendId ? this.faceId : Facade.GetUserData().FaceId;
@@ -99,6 +115,7 @@ public class ChatPanel : BasePanel
                 string message = msg[2];
                 SetChatItem(faceId, message, ticks, faceId != this.faceId, false);
             }
+            getAllReciveMsgs.SendRequest(Facade.GetUserData().LoginId + "," + friendId);
         }
     }
 
@@ -107,6 +124,15 @@ public class ChatPanel : BasePanel
     /// </summary>
     public override void OnExit()
     {
+        while (chatItems.Count > 0)
+        {
+            GameObject go = chatItems[0];
+            go.SetActive(false);
+            chatItems.RemoveAt(0);
+            GameObject.DestroyImmediate(go);
+        }
+        content.sizeDelta = new Vector2(content.sizeDelta.x, 50);
+        chatReceiveRequest.OnDestroy();
         HideAnimation();
     }
 
@@ -143,7 +169,10 @@ public class ChatPanel : BasePanel
             delta = datetime.Subtract(epoc);
             long ticks = (long)delta.TotalMilliseconds;
             string data = id + "," + friendId + "," + message + "," + ticks;
-            SetChatItem(Facade.GetUserData().FaceId,message, ticks, true, true);
+            SetChatItem(Facade.GetUserData().FaceId, message, ticks, true, true);
+
+            Facade.GetUnreadFriendMsg().Add(friendId, (faceId, nickName.text, message, ticks.ToString()));
+
             chatSendRequest.SendRequest(data);
         }
         catch (Exception ex)
@@ -157,10 +186,6 @@ public class ChatPanel : BasePanel
     /// </summary>
     private void SetChatItem(int faceId, string message, long ticks, bool isSelf, bool isFirst)
     {
-        // 设置layout大小
-        Vector2 size = content.sizeDelta;
-        content.sizeDelta = new Vector2(size.x, 25 + 40 * (chatItems.Count + 1));
-
         GameObject go;
 
         if (isSelf)
@@ -176,17 +201,21 @@ public class ChatPanel : BasePanel
         // 设置子物体属性
         DateTime sendTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
         sendTime = sendTime.AddMilliseconds(ticks);
+        string dateStr = sendTime.ToLongTimeString();
+        if (sendTime.Day < DateTime.Now.Day || sendTime.Month < DateTime.Now.Month || sendTime.Year < DateTime.Now.Year)
+        {
+            dateStr = sendTime.Month + "." + sendTime.Day + sendTime.ToLongTimeString();
+            if (sendTime.Year < DateTime.Now.Year)
+            {
+                dateStr = sendTime.Year + "." + sendTime.Month + "." + sendTime.Day + sendTime.ToLongTimeString();
+            }
+        }
 
-        go.transform.Find("Message").GetComponent<Text>().text = sendTime.ToLongTimeString() + "\n" + message;
+        go.transform.Find("Message").GetComponent<Text>().text = "<color=\"#556688\">" + dateStr + "</color>" + "\n" + message;
 
         string facePath = "FaceImage/" + faceId;
         Sprite face = Resources.Load<Sprite>(facePath);
         go.transform.Find("FaceMask/Image").GetComponent<Image>().sprite = face;
-
-        size = go.GetComponent<RectTransform>().sizeDelta;
-        float y = go.transform.Find("Message").GetComponent<RectTransform>().sizeDelta.y;
-        y = y > 40 ? y : 40;
-        go.GetComponent<RectTransform>().sizeDelta = new Vector2(size.x, y);
 
         // 设置父物体
         go.transform.SetParent(content, false);
@@ -200,7 +229,29 @@ public class ChatPanel : BasePanel
         {
             messages.RemoveAt(0);
         }
-        PlayerPrefs.SetString(Facade.GetUserData().LoginId + friendId + "messages", GetStringByList(messages));
+        PlayerPrefs.SetString(Facade.GetUserData().LoginId.ToString() + "," + friendId.ToString() + "messages", GetStringByList(messages));
+        
+        StartCoroutine("InsSrollBar");
+        StartCoroutine("SetDelta", go);
+    }
+
+    IEnumerator InsSrollBar()
+    {
+        yield return new WaitForEndOfFrame();
+        scrollbar.value = 0;
+    }
+
+    IEnumerator SetDelta(GameObject go)
+    {
+        yield return new WaitForEndOfFrame();
+        Vector2 size = go.GetComponent<RectTransform>().sizeDelta;
+        float y = go.transform.Find("Message").GetComponent<RectTransform>().sizeDelta.y;
+        y = y > 40 ? y : 40;
+        go.GetComponent<RectTransform>().sizeDelta = new Vector2(size.x, y);
+
+        // 设置layout大小
+        size = content.sizeDelta;
+        content.sizeDelta = new Vector2(size.x, size.y + 4 + go.GetComponent<RectTransform>().sizeDelta.y);
     }
 
     /// <summary>
@@ -256,6 +307,11 @@ public class ChatPanel : BasePanel
             this.message = message;
             this.ticks = ticks;
         }
+    }
+
+    public void OnResponseGetReceiveMsgs(ReturnCode returnCode)
+    {
+
     }
 
     private string GetStringByList(List<string> list)

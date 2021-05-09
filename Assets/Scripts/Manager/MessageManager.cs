@@ -27,16 +27,17 @@ public class MessageManager : BaseManager
         UserFriendMsgDic = new Dictionary<int, (int, string, string, string)>();
         SystemMsgDic = new Dictionary<int, int>();
         this.getMsgRequest = getMsgRequest;
+        //getMsgRequest.SendRequest(facade.GetUserData().LoginId.ToString());
     }
 
     public override void Update()
     {
-        timer += Time.deltaTime;
-        if (timer >= 1)
-        {
-            getMsgRequest.SendRequest(facade.GetUserData().LoginId.ToString());
-            timer = 0;
-        }
+        //timer += Time.deltaTime;
+        //if (timer >= 1)
+        //{
+        //    getMsgRequest.SendRequest(facade.GetUserData().LoginId.ToString());
+        //    timer = 0;
+        //}
 
         if (dict != null)
         {

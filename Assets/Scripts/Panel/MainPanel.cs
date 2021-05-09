@@ -220,8 +220,9 @@ public class MainPanel : BasePanel
 
     public void AddDict(int id, string nickName, string message, long ticks)
     {
-        DateTime date = new DateTime(ticks);
-        chatDic[id] = (chatDic[id].Item1,nickName, message, date.ToLongTimeString());
+        DateTime sendTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+        sendTime = sendTime.AddMilliseconds(ticks);
+        chatDic[id] = (chatDic[id].Item1,nickName, message, sendTime.ToLongTimeString());
     }
 
     /// <summary>
@@ -261,13 +262,16 @@ public class MainPanel : BasePanel
             // 设置子物体属性
             go.transform.Find("NickName").GetComponent<Text>().text = nickName;
             go.transform.Find("ChatRecord").GetComponent<Text>().text = item.Item3;
-            go.transform.Find("Date").GetComponent<Text>().text = new DateTime(long.Parse(item.Item4)).ToLongTimeString();
+            DateTime sendTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+            sendTime = sendTime.AddMilliseconds(long.Parse(item.Item4));
+            go.transform.Find("Date").GetComponent<Text>().text = sendTime.ToLongTimeString();
             go.name = keys[i].ToString();
 
             string facePath = "FaceImage/" + faceId;
             Sprite face = Resources.Load<Sprite>(facePath);
             go.transform.Find("FaceMask/Image").GetComponent<Image>().sprite = face;
 
+            go.GetComponent<Button>().onClick.RemoveAllListeners();
             go.GetComponent<Button>().onClick.AddListener(OnClickChatItem);
             // 设置父物体
             go.transform.SetParent(content, false);

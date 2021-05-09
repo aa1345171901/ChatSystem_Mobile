@@ -2,13 +2,14 @@
 using System;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 /// <summary>
 /// 用于进行消息处理，打包与解析
 /// </summary>
 public class Message
 {
-    private byte[] data = new byte[1024];
+    private byte[] data = new byte[10240];
     private int startIndex = 0;
 
     private int count = 0; // 用于保存本次数据的长度
@@ -92,7 +93,6 @@ public class Message
 
             startIndex -= newCount;
         }
-
         if (allCount == count)
         {
             processDataCallback(actionCode, dataStr);
