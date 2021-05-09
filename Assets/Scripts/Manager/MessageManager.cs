@@ -32,12 +32,12 @@ public class MessageManager : BaseManager
 
     public override void Update()
     {
-        //timer += Time.deltaTime;
-        //if (timer >= 1)
-        //{
-        //    getMsgRequest.SendRequest(facade.GetUserData().LoginId.ToString());
-        //    timer = 0;
-        //}
+        timer += Time.deltaTime;
+        if (timer >= 3)
+        {
+            getMsgRequest.SendRequest(facade.GetUserData().LoginId.ToString());
+            timer = 0;
+        }
 
         if (dict != null)
         {

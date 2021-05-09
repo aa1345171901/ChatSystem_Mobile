@@ -12,6 +12,7 @@ public class ChatByReceiveRequest : BaseRequest
         chatPanel = GetComponent<ChatPanel>();
         requestCode = RequestCode.Message;
         actionCode = ActionCode.ChatByReceive;
+        base.Awake();
     }
 
     public void Init()

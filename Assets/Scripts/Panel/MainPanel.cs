@@ -146,7 +146,7 @@ public class MainPanel : BasePanel
     /// </summary>
     public override void OnExit()
     {
-        gameObject.SetActive(false);
+        Invoke("SetActive", 0.5f);
         HideAnimation(messageImg);
     }
 
@@ -155,8 +155,13 @@ public class MainPanel : BasePanel
     /// </summary>
     public override void OnPause()
     {
-        //gameObject.SetActive(false);
+        Invoke("SetActive", 0.5f);
         screenSwipe.enabled = false;
+    }
+
+    private void SetActive()
+    {
+        gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -187,6 +192,7 @@ public class MainPanel : BasePanel
     /// <param name="uIPanelType"></param>
     private void PushFriendPanel()
     {
+        SetActive();
         uiMng.PopPanel();
         uiMng.PushPanel(UIPanelType.FriendPanel);
     }
@@ -197,6 +203,7 @@ public class MainPanel : BasePanel
     /// <param name="uIPanelType"></param>
     private void PushFriendQPanel()
     {
+        SetActive();
         uiMng.PopPanel();
         uiMng.PushPanel(UIPanelType.FriendQPanel);
     }
@@ -275,6 +282,11 @@ public class MainPanel : BasePanel
             go.GetComponent<Button>().onClick.AddListener(OnClickChatItem);
             // 设置父物体
             go.transform.SetParent(content, false);
+
+            if (Facade.GetUnreadFriendMsg().ContainsKey(keys[i]))
+            {
+                go.transform.Find("Have").gameObject.SetActive(true);
+            }
         }
     }
 
@@ -284,7 +296,8 @@ public class MainPanel : BasePanel
         var button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
         int friendId = int.Parse(button.name);
 
-        //uiMng.PopPanel();
+        uiMng.PopPanel();
+        button.transform.Find("Have").gameObject.SetActive(false);
         ChatPanel chatPanel = uiMng.PushPanel(UIPanelType.ChatPanel) as ChatPanel;
         int faceId = 1;
         int.TryParse(button.transform.Find("FaceMask/Image").GetComponent<Image>().sprite.name.Trim(), out faceId);

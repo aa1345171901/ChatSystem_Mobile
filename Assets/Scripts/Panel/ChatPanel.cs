@@ -62,9 +62,10 @@ public class ChatPanel : BasePanel
     // Update is called once per frame
     void Update()
     {
-        if (message != null && IsEnter)
+        if (message != null)
         {
             SetChatItem(faceId, message, ticks, false, true);
+            Facade.GetUnreadFriendMsg().Add(friendId, (faceId, nickName.text, message, ticks.ToString()));
             message = null;
         }
 
@@ -93,7 +94,6 @@ public class ChatPanel : BasePanel
     public override void OnEnter()
     {
         this.gameObject.SetActive(true);
-        chatReceiveRequest.Init();
         EnterAnimation();
 
         Invoke("SetItem", 0.5f);
@@ -132,7 +132,6 @@ public class ChatPanel : BasePanel
             GameObject.DestroyImmediate(go);
         }
         content.sizeDelta = new Vector2(content.sizeDelta.x, 50);
-        chatReceiveRequest.OnDestroy();
         HideAnimation();
     }
 
