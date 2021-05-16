@@ -167,6 +167,9 @@ public class ModifyDetailPanel : BasePanel
         modifyRequest.SendRequest(data);
     }
 
+    /// <summary>
+    /// 更换头像
+    /// </summary>
     private void OnClickFace()
     {
         uiMng.PushPanel(UIPanelType.FacePanel);
