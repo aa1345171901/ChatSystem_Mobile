@@ -45,6 +45,9 @@ public class Facade : MonoBehaviour
     private void Start()
     {
         OnInit();
+        //  float screenAspect = 1280 / 720;  现在android手机的主流分辨。
+        //  mainCamera.aspect --->  摄像机的长宽比（宽度除以高度）
+        Camera.main.aspect = 1.78f;
     }
 
     /// <summary>

@@ -148,7 +148,7 @@ public class SystemPanel : BasePanel
     {
         // 设置layout大小
         Vector2 size = content.sizeDelta;
-        content.sizeDelta = new Vector2(size.x, 25 + 40 * (friendDict.Count + 1));
+        content.sizeDelta = new Vector2(size.x, 25 + 80 * (friendDict.Count + 1));
 
         friendData = "";
 

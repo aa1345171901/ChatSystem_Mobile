@@ -236,6 +236,7 @@ public class FriendDetailPanel : BasePanel
         else
         {
             uiMng.ShowMessageSync("删除成功，正在刷新好友列表");
+            uiMng.PopPanelSync();
             //GetFriendListRequest getFriendListRequest = transform.parent.GetComponentInChildren<GetFriendListRequest>();
             //getFriendListRequest.SendRequest(Facade.GetUserData().GetId.ToString());
         }

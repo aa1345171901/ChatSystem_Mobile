@@ -60,7 +60,7 @@ public class FacePanel : BasePanel
     {
         // 设置layout大小
         Vector2 size = content.sizeDelta;
-        content.sizeDelta = new Vector2(size.x, 25 + 100 * 50);
+        content.sizeDelta = new Vector2(size.x, 25 + 160 * 42);
 
         for (int i = 1; i <= 150; i++)
         {

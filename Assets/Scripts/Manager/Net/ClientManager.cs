@@ -27,7 +27,7 @@ public class ClientManager : BaseManager
     {
         base.OnInit();
         message = new Message();
-        clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
+        clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         try
         {
             clientSocket.Connect(IP, PORT);

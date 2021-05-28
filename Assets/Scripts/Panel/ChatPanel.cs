@@ -245,7 +245,7 @@ public class ChatPanel : BasePanel
         yield return new WaitForEndOfFrame();
         Vector2 size = go.GetComponent<RectTransform>().sizeDelta;
         float y = go.transform.Find("Message").GetComponent<RectTransform>().sizeDelta.y;
-        y = y > 40 ? y : 40;
+        y = y > 60 ? y : 60;
         go.GetComponent<RectTransform>().sizeDelta = new Vector2(size.x, y);
 
         // 设置layout大小

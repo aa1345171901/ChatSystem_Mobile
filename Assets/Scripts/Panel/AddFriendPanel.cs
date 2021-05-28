@@ -185,7 +185,7 @@ public class AddFriendPanel : BasePanel
     {
         // 设置layout大小
         Vector2 size = content.sizeDelta;
-        content.sizeDelta = new Vector2(size.x, 25 + 60 * (searchFriends.Count + 1));
+        content.sizeDelta = new Vector2(size.x, 80 + 120 * (searchFriends.Count));
 
         int index = 0;
         foreach (var item in searchFriends)

@@ -27,9 +27,9 @@ public class ReFlash : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (content.localPosition.y < -5)
+        if (content.localPosition.y < -10)
         {
-            if (content.localPosition.y < - 50)
+            if (content.localPosition.y < - 100)
             {
                 showText.text = "释放立即更新";
             }
