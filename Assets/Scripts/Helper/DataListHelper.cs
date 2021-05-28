@@ -9,8 +9,8 @@ public static class DataListHelper
     private static string[] starList = null;
     private static string[] bloodTypeList = null;
 
-    private static string starTextPath = Application.dataPath + @"\Data\star.txt";
-    private static string bloodTypeTextPath = Application.dataPath + @"\Data\bloodtype.txt";
+    private static string starTextPath = "Data/star";
+    private static string bloodTypeTextPath = "Data/bloodtype";
 
     /// <summary>
     /// 获取星座列表
@@ -21,9 +21,9 @@ public static class DataListHelper
         {
             if (starList == null)
             {
-                starList = File.ReadAllLines(starTextPath);
+                TextAsset str = Resources.Load<TextAsset>(starTextPath);
+                starList = str.text.Split('\n');
             }
-
             return starList;
         }
     }
@@ -37,7 +37,8 @@ public static class DataListHelper
         {
             if (bloodTypeList == null)
             {
-                bloodTypeList = File.ReadAllLines(bloodTypeTextPath);
+                string str = Resources.Load<TextAsset>(bloodTypeTextPath).ToString();
+                bloodTypeList = str.Split('\n');
             }
 
             return bloodTypeList;
