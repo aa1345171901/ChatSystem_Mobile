@@ -43,7 +43,7 @@ public class ScreenSwipe : MonoBehaviour
             {
                 fingerBeginY = Input.mousePosition.y;
                 fingerBeginX = Input.mousePosition.x;
-                if (fingerBeginY < 80)
+                if (fingerBeginY < 160)
                 {
                     return;
                 }
@@ -58,7 +58,7 @@ public class ScreenSwipe : MonoBehaviour
 
             fingerSegmentX = fingerCurrentX - fingerBeginX;
             fingerSegmentY = fingerCurrentY - fingerBeginY;
-            if(Math.Abs(fingerSegmentX) > Math.Abs(fingerSegmentY))
+            if(Math.Abs(fingerSegmentX) >= Math.Abs(fingerSegmentY))
             {
                 // 右滑过程中，发送消息给其他panel进行滑动
                 SendMessage("OnFingerMove", fingerSegmentX);

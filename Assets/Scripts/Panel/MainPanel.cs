@@ -313,20 +313,20 @@ public class MainPanel : BasePanel
         // 向右滑
         if (offset > 0)
         {
-            offset = offset > 720 ? 720 : offset;
+            offset = offset > 1080 ? 1080 : offset;
             // 当panel在中间才能向右滑
-            if (this.transform.localPosition.x < 720)
+            if (this.transform.localPosition.x < 1080)
             {
                 this.transform.localPosition = new Vector3(offset, 0, 0);
             }
         }
         else
         {
-            offset = offset < -720 ? -720 : offset;
+            offset = offset < -1080 ? -1080 : offset;
             // 当panel在右边才能向左滑
             if (this.transform.localPosition.x > 0)
             {
-                this.transform.localPosition = new Vector3(720 + offset, 0, 0);
+                this.transform.localPosition = new Vector3(1080 + offset, 0, 0);
             }
         }
     }
@@ -341,7 +341,7 @@ public class MainPanel : BasePanel
             // 当panel在右边才能向左滑
             if (this.transform.localPosition.x > 0)
             {
-                Tween t = this.transform.DOLocalMoveX(720, 0.2f);
+                Tween t = this.transform.DOLocalMoveX(1080, 0.2f);
             }
             // t.OnComplete(() => gameObject.SetActive(false));
         }
